@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.2.1...mneme-v0.3.0) (2026-03-22)
+
+
+### Features
+
+* **mneme:** rename plugin from loci-ctx to mneme ([c633ee8](https://github.com/SentioLabs/claude-marketplace/commit/c633ee89e6615c594026df6c6b703f4957edc6e9))
+
 ## [0.2.1](https://github.com/SentioLabs/claude-marketplace/compare/mneme-ctx-v0.2.0...mneme-ctx-v0.2.1) (2026-03-22)
 
 
