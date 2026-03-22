@@ -1,13 +1,13 @@
 {
-  "name": "loci-ctx",
+  "name": "mneme",
   "version": "0.2.1",
   "description": "Context window protection for Claude Code — sandboxed execution, FTS knowledge base, session continuity. Powered by a single Rust binary.",
   "author": {
     "name": "SentioLabs",
     "url": "https://github.com/sentiolabs"
   },
-  "homepage": "https://github.com/sentiolabs/loci-ctx",
-  "repository": "https://github.com/sentiolabs/loci-ctx",
+  "homepage": "https://github.com/sentiolabs/mneme",
+  "repository": "https://github.com/sentiolabs/mneme",
   "license": "MIT",
   "keywords": [
     "context-window",

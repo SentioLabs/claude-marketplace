@@ -1,0 +1,20 @@
+{
+  "description": "mneme hooks — PreToolUse routing, PostToolUse session capture, PreCompact snapshot, SessionStart context injection",
+  "hooks": {
+    "PreToolUse": [
+      { "matcher": "Bash", "hooks": [{ "type": "command", "command": "mneme hook pretooluse" }] },
+      { "matcher": "WebFetch", "hooks": [{ "type": "command", "command": "mneme hook pretooluse" }] },
+      { "matcher": "Read", "hooks": [{ "type": "command", "command": "mneme hook pretooluse" }] },
+      { "matcher": "Grep", "hooks": [{ "type": "command", "command": "mneme hook pretooluse" }] }
+    ],
+    "PostToolUse": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "mneme hook posttooluse" }] }
+    ],
+    "SessionStart": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "mneme hook sessionstart" }] }
+    ],
+    "PreCompact": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "mneme hook precompact" }] }
+    ]
+  }
+}

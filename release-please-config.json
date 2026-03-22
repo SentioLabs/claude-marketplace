@@ -21,9 +21,9 @@
         {"type": "test", "section": "Tests", "hidden": true}
       ]
     },
-    "plugins/loci-ctx": {
+    "plugins/mneme": {
       "release-type": "simple",
-      "component": "loci-ctx",
+      "component": "mneme",
       "bump-minor-pre-major": true,
       "extra-files": [
         {

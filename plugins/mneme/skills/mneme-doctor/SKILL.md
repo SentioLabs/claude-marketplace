@@ -1,12 +1,12 @@
 ---
-name: loci-doctor
+name: mneme-doctor
 description: >
-  Check loci system health. Displays runtime availability, server status,
+  Check mneme system health. Displays runtime availability, server status,
   database health, and configuration.
-  Trigger: /loci-doctor, "loci doctor", "check loci health", "loci diagnostics"
+  Trigger: /mneme:doctor, "mneme doctor", "check mneme health", "mneme diagnostics"
 ---
 
-# loci doctor
+# mneme doctor
 
 Run system health diagnostics.
 
@@ -15,7 +15,7 @@ Run system health diagnostics.
 Run the following command and display the output as a checklist:
 
 ```bash
-loci doctor --json
+mneme doctor --json
 ```
 
 Format each check as:

@@ -17,8 +17,8 @@
       }
     },
     {
-      "name": "loci-ctx",
-      "source": "./plugins/loci-ctx",
+      "name": "mneme",
+      "source": "./plugins/mneme",
       "description": "Context window protection — sandboxed execution in 11 languages, FTS knowledge base with BM25 ranking, session continuity. Single Rust binary, <5ms hooks.",
       "author": {
         "name": "Sentio Labs"

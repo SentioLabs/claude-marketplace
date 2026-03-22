@@ -1,12 +1,12 @@
 ---
-name: loci-stats
+name: mneme-stats
 description: >
-  Show loci context savings statistics. Displays token consumption,
+  Show mneme context savings statistics. Displays token consumption,
   context savings ratio, and per-tool breakdown.
-  Trigger: /loci-stats, "loci stats", "context stats", "context savings"
+  Trigger: /mneme:stats, "mneme stats", "context stats", "context savings"
 ---
 
-# loci stats
+# mneme stats
 
 Show context window savings for this session.
 
@@ -15,7 +15,7 @@ Show context window savings for this session.
 Run the following command and display the output:
 
 ```bash
-loci stats --json
+mneme stats --json
 ```
 
 Format the JSON output as a readable summary:
