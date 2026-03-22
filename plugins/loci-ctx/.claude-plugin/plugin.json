@@ -17,5 +17,5 @@
     "bm25",
     "rust"
   ],
-  "skills": "./.claude-plugin/skills/"
+  "skills": "./skills/"
 }
