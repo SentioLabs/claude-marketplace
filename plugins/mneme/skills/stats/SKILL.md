@@ -1,5 +1,5 @@
 ---
-name: mneme-stats
+name: stats
 description: >
   Show mneme context savings statistics. Displays token consumption,
   context savings ratio, and per-tool breakdown.

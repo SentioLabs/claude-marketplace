@@ -1,5 +1,5 @@
 ---
-name: mneme-doctor
+name: doctor
 description: >
   Check mneme system health. Displays runtime availability, server status,
   database health, and configuration.

@@ -1,5 +1,5 @@
 ---
-name: mneme-setup
+name: setup
 description: >
   First-run setup and validation for mneme. Checks that the mneme binary
   is on PATH, the server is running, and guides installation if needed.
