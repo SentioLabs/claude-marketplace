@@ -1,9 +1,5 @@
 ---
-name: setup
-description: >
-  First-run setup and validation for mneme. Checks that the mneme binary
-  is on PATH, the server is running, and guides installation if needed.
-  Trigger: /mneme:setup, "setup mneme", "install mneme", "configure mneme"
+description: First-run setup and validation — checks binary, server, and guides installation
 ---
 
 # mneme setup

@@ -1,9 +1,5 @@
 ---
-name: stats
-description: >
-  Show mneme context savings statistics. Displays token consumption,
-  context savings ratio, and per-tool breakdown.
-  Trigger: /mneme:stats, "mneme stats", "context stats", "context savings"
+description: Show context savings statistics — token consumption, savings ratio, and per-tool breakdown
 ---
 
 # mneme stats

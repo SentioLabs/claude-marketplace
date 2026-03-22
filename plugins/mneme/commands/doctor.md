@@ -1,9 +1,5 @@
 ---
-name: doctor
-description: >
-  Check mneme system health. Displays runtime availability, server status,
-  database health, and configuration.
-  Trigger: /mneme:doctor, "mneme doctor", "check mneme health", "mneme diagnostics"
+description: Check mneme system health — runtime availability, server status, database health, and configuration
 ---
 
 # mneme doctor
