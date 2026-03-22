@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/SentioLabs/claude-marketplace/compare/arc-v0.3.0...arc-v0.4.0) (2026-03-22)
+
+
+### Features
+
+* **arc/brainstorm:** add routing analysis to guide plan vs implement decision ([f779b43](https://github.com/SentioLabs/claude-marketplace/commit/f779b430f213f0e134807cafaae45ec81a22152a))
+
 ## [0.3.0](https://github.com/SentioLabs/claude-marketplace/compare/arc-v0.2.0...arc-v0.3.0) (2026-03-22)
 
 
