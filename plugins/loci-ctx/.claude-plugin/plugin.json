@@ -16,6 +16,5 @@
     "fts",
     "bm25",
     "rust"
-  ],
-  "skills": "./skills/"
+  ]
 }
