@@ -1,6 +1,6 @@
 {
   "name": "loci-ctx",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Context window protection for Claude Code — sandboxed execution, FTS knowledge base, session continuity. Powered by a single Rust binary.",
   "author": {
     "name": "SentioLabs",
@@ -9,6 +9,13 @@
   "homepage": "https://github.com/sentiolabs/loci-ctx",
   "repository": "https://github.com/sentiolabs/loci-ctx",
   "license": "MIT",
-  "keywords": ["context-window", "sandbox", "code-execution", "fts", "bm25", "rust"],
+  "keywords": [
+    "context-window",
+    "sandbox",
+    "code-execution",
+    "fts",
+    "bm25",
+    "rust"
+  ],
   "skills": "./.claude-plugin/skills/"
 }
