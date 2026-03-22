@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.3.0...mneme-v0.4.0) (2026-03-22)
+
+
+### Features
+
+* **mneme:** drop plugin prefix from skill dirs for colon namespace ([94c3c66](https://github.com/SentioLabs/claude-marketplace/commit/94c3c66ba71d7767527739959b0eb4aeb15d55ac))
+
 ## [0.3.0](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.2.1...mneme-v0.3.0) (2026-03-22)
 
 
