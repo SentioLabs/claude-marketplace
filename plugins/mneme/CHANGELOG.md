@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.4.0...mneme-v0.5.0) (2026-03-22)
+
+
+### Features
+
+* **mneme:** use bare skill names in SKILL.md frontmatter ([cb38073](https://github.com/SentioLabs/claude-marketplace/commit/cb38073dfab891e55e6ef81397d54d77f16a893a))
+
 ## [0.4.0](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.3.0...mneme-v0.4.0) (2026-03-22)
 
 
