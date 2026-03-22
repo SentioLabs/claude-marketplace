@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.5.0...mneme-v0.6.0) (2026-03-22)
+
+
+### Features
+
+* **mneme:** convert doctor, setup, stats from skills to commands ([e6fa6df](https://github.com/SentioLabs/claude-marketplace/commit/e6fa6df8132e20e84658b90bdc72a8a429d1798a))
+
 ## [0.5.0](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.4.0...mneme-v0.5.0) (2026-03-22)
 
 
