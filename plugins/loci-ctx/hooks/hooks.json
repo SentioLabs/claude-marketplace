@@ -1,0 +1,20 @@
+{
+  "description": "loci-ctx hooks — PreToolUse routing, PostToolUse session capture, PreCompact snapshot, SessionStart context injection",
+  "hooks": {
+    "PreToolUse": [
+      { "matcher": "Bash", "hooks": [{ "type": "command", "command": "loci hook pretooluse" }] },
+      { "matcher": "WebFetch", "hooks": [{ "type": "command", "command": "loci hook pretooluse" }] },
+      { "matcher": "Read", "hooks": [{ "type": "command", "command": "loci hook pretooluse" }] },
+      { "matcher": "Grep", "hooks": [{ "type": "command", "command": "loci hook pretooluse" }] }
+    ],
+    "PostToolUse": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "loci hook posttooluse" }] }
+    ],
+    "SessionStart": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "loci hook sessionstart" }] }
+    ],
+    "PreCompact": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "loci hook precompact" }] }
+    ]
+  }
+}

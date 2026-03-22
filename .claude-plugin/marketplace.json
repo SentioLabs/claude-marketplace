@@ -1,0 +1,28 @@
+{
+  "name": "sentiolabs-plugins",
+  "owner": {
+    "name": "Sentio Labs",
+    "url": "https://github.com/sentiolabs"
+  },
+  "metadata": {
+    "description": "Claude Code plugins by Sentio Labs"
+  },
+  "plugins": [
+    {
+      "name": "arc",
+      "source": "./plugins/arc",
+      "description": "Central issue tracker for AI-assisted coding workflows. Manage tasks, track work, and maintain context with simple CLI commands.",
+      "author": {
+        "name": "Sentio Labs"
+      }
+    },
+    {
+      "name": "loci-ctx",
+      "source": "./plugins/loci-ctx",
+      "description": "Context window protection — sandboxed execution in 11 languages, FTS knowledge base with BM25 ranking, session continuity. Single Rust binary, <5ms hooks.",
+      "author": {
+        "name": "Sentio Labs"
+      }
+    }
+  ]
+}
