@@ -1,4 +1,4 @@
 {
-  "plugins/arc": "0.1.32",
-  "plugins/loci-ctx": "0.1.0"
+  "plugins/arc": "0.2.0",
+  "plugins/loci-ctx": "0.2.0"
 }
