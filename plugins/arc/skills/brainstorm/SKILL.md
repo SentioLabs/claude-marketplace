@@ -173,16 +173,54 @@ Revise the design file based on the feedback, then re-present the planner URL an
 **If user says "save for later":**
 Tell the user they can resume by running `/arc:brainstorm` in a new session and referencing the plan file and plan ID.
 
-### 8. Transition
+### 8. Routing Analysis & Transition
 
-After the plan is approved, use the **AskUserQuestion tool:**
+After the plan is approved, **you MUST produce a routing analysis before presenting options**. This analysis helps the user make an informed decision about what to do next.
+
+#### Routing Analysis
+
+Evaluate the approved design against these criteria and present a summary:
+
+| Factor | Assessment |
+|--------|------------|
+| **Work items** | Count of distinct implementation tasks identified in the design |
+| **Parallel readiness** | Were shared contracts identified in step 5? (yes = plan needed for T0 sequencing) |
+| **Files touched** | Approximate number of files created or modified |
+| **Layers crossed** | Which architecture layers are involved (storage, API, CLI, frontend, tests) |
+| **Risk areas** | Any migrations, API changes, or breaking changes? |
+| **Scale** | Small / Medium / Large (from Scale Detection table) |
+
+Then produce a **recommendation** with reasoning:
+
+```
+📊 Routing Analysis
+───────────────────
+Work items:       N tasks identified
+Parallel ready:   Yes/No (shared contracts in step 5)
+Files touched:    ~N files across N directories
+Layers crossed:   [storage, API, CLI, ...]
+Risk areas:       [migrations, breaking changes, none, ...]
+Scale:            Small / Medium / Large
+
+➤ Recommendation: /arc:plan | /arc:implement
+  Reason: <1-2 sentence justification based on the factors above>
+```
+
+**Routing rules** (use these to drive the recommendation):
+- **→ arc:plan** when ANY of: 2+ work items, shared contracts exist, multiple layers crossed, migrations or breaking changes present, medium/large scale
+- **→ arc:implement** when ALL of: single work item, no shared contracts, single layer, no risk areas, small scale
+- When borderline, recommend `arc:plan` — the overhead of planning is low, but the cost of a disorganized multi-task implementation is high
+
+After the analysis, use the **AskUserQuestion tool** — mark the recommended option:
 ```
 Question: "Design approved! What's next?"
 Options:
-  - "Break into tasks with /arc:plan" (create epic + implementation tasks)
+  - "Break into tasks with /arc:plan" (recommended — <brief reason from analysis>)
   - "Implement directly with /arc:implement" (for small, single-task work)
   - "Done for now" (design is saved — continue in a new session)
 ```
+
+If `/arc:implement` is recommended instead, swap which option gets the "(recommended)" tag.
 
 - **Break into tasks**: invoke the `plan` skill, passing the plan ID
 - **Implement directly**: invoke the `implement` skill
