@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.6.0...mneme-v0.7.0) (2026-03-23)
+
+
+### Features
+
+* **mneme:** add SessionEnd and Stop hooks for memory prompting ([630e747](https://github.com/SentioLabs/claude-marketplace/commit/630e74744db5eea126e3f6d823fe00caf204d99d))
+
 ## [0.6.0](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.5.0...mneme-v0.6.0) (2026-03-22)
 
 
