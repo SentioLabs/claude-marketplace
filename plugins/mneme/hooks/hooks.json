@@ -1,5 +1,5 @@
 {
-  "description": "mneme hooks — PreToolUse routing, PostToolUse session capture, PreCompact snapshot, SessionStart context injection",
+  "description": "mneme hooks — PreToolUse routing, PostToolUse session capture, PreCompact snapshot, SessionStart context injection, SessionEnd memory review, Stop memory prompting",
   "hooks": {
     "PreToolUse": [
       { "matcher": "Bash", "hooks": [{ "type": "command", "command": "mneme hook pretooluse" }] },
@@ -15,6 +15,12 @@
     ],
     "PreCompact": [
       { "matcher": "", "hooks": [{ "type": "command", "command": "mneme hook precompact" }] }
+    ],
+    "SessionEnd": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "mneme hook sessionend" }] }
+    ],
+    "Stop": [
+      { "matcher": "", "hooks": [{ "type": "command", "command": "mneme hook stop" }] }
     ]
   }
 }
