@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.8.0...mneme-v0.8.1) (2026-03-24)
+
+
+### Bug Fixes
+
+* **mneme:** document memory search/recall CLI syntax in skill ([7b5da78](https://github.com/SentioLabs/claude-marketplace/commit/7b5da78062958482409d240661e007b2bfdcbcdf))
+
 ## [0.8.0](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.7.0...mneme-v0.8.0) (2026-03-24)
 
 
