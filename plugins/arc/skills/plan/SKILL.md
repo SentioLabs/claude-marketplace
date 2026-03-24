@@ -128,10 +128,12 @@ When identifying tasks, assign **file ownership** — each file should be owned 
 **Never run `arc create` directly** — always delegate to the `arc-issue-tracker` agent. This keeps bulk CLI output in a disposable subagent context.
 
 Read the full plan content first (`arc plan show <plan-id>`), then build a task manifest that includes:
-1. **The epic** with the **full plan content** as its description (not a summary or file reference)
+1. **The epic** — its description will be populated by the agent from the plan file (see below)
 2. **All child tasks** with self-contained descriptions
 
-Dispatch the manifest:
+**Critical**: Do NOT paste or summarize the plan content into the agent prompt. Instead, pass the plan file path and let the agent read it directly. This prevents content loss from summarization.
+
+Get the plan file path from the `arc plan show` output (the `file_path` field), then dispatch the manifest:
 
 ```
 Use the Agent tool with subagent_type="arc:arc-issue-tracker":
@@ -144,8 +146,11 @@ Return a summary table mapping task names to arc IDs.
 
 ### <epic title>
 Type: epic
-Description:
-<FULL content of the approved plan markdown file — paste it entirely, do NOT summarize>
+Plan file: <absolute path to the plan markdown file>
+
+IMPORTANT: Read the plan file at the path above using the Read tool. Use the COMPLETE
+file contents as the epic description. Do NOT summarize, truncate, or paraphrase —
+copy the full file content verbatim as the description.
 
 ## Tasks
 
@@ -175,7 +180,7 @@ Description:
 | T1   | ...    | ...   |
 ```
 
-**IMPORTANT**: The epic description MUST contain the complete approved design — the full markdown content from `arc plan show <plan-id>`. Do NOT summarize it or replace it with a file reference. The plan file is ephemeral; the epic description is the permanent record.
+**IMPORTANT**: The epic description MUST contain the complete approved design. The agent reads the plan file directly to avoid any summarization or content loss. The plan file is ephemeral; the epic description is the permanent record.
 
 For each task, check whether **all** files in its `## Files` section are documentation (`.md`, `.txt`, `README`, `CHANGELOG`, or anything under `docs/`). If so, include it in the `## Labels` section with `docs-only`. Doc-only tasks skip TDD — the `implement` skill routes them to `arc-doc-writer` instead of `arc-implementer`.
 
