@@ -45,6 +45,7 @@ The mneme CLI uses **long flags only** (`--lang`, `--code`, `--path`, `--url`). 
 | `Grep` with many results | `mneme execute --lang shell --code 'grep ...'` |
 | `WebFetch` | `mneme fetch --url <url>` then `mneme search -q '...'` |
 | Multiple commands + analysis | `mneme batch --commands-json '[...]' --queries-json '[...]'` |
+| "What should I do before X?" / recalling preferences | `mneme memory search "query"` |
 
 **When to use Read instead of exec-file**: If you are reading a file in order to **Edit** it, use Read -- you need the content in context for the edit. Use exec-file only when you are reading to **analyze or summarize**.
 
@@ -117,6 +118,23 @@ mneme search -q "connection timeout errors"
 mneme search -q "how does authentication work"
 mneme search -q "database schema" --source "architecture-docs"
 ```
+
+### Search agent memories
+
+Use `mneme memory search` to find stored preferences, knowledge, and decisions:
+
+```bash
+mneme memory search "before pushing code"
+mneme memory search "testing strategy" --limit 5
+```
+
+Use `mneme memory recall` for a context-free top-K recall (no query argument — returns highest-confidence memories):
+
+```bash
+mneme memory recall --project mneme --top-k 5
+```
+
+**Important:** `memory search` takes a `<QUERY>` positional argument. `memory recall` takes **no** positional argument — it only accepts options (`--project`, `--top-k`, `--format`). Do not pass a query string to `recall`.
 
 ## Output Constraints
 
