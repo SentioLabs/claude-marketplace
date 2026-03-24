@@ -14,9 +14,9 @@
     {
       "id": 2,
       "prompt": "Fetch the Rust documentation for the axum crate and find how to add middleware",
-      "expected_output": "Claude uses mneme fetch to retrieve docs, then mneme search to query",
+      "expected_output": "Claude uses mneme fetch, WebFetch, or similar to retrieve docs, then mneme search to query",
       "expectations": [
-        "Uses mneme fetch instead of curl, wget, or WebFetch",
+        "Uses mneme fetch or WebFetch to retrieve documentation (WebFetch content is automatically indexed by mneme)",
         "Uses mneme search to query the indexed documentation",
         "Does not use curl or wget in any Bash command"
       ]

@@ -8,7 +8,7 @@ description: >
   build output, analyze dependencies, process API responses, do large file analysis, run tests and
   check output, review git log or recent commits, diff between branches, find TODOs, count lines,
   check codebase statistics, fetch documentation, call APIs, or any operation that may produce more
-  than 20 lines of output. The PreToolUse hook enforces routing automatically for curl/wget/WebFetch.
+  than 20 lines of output. The PreToolUse hook enforces routing automatically for curl/wget.
 ---
 
 # mneme -- context window protection
@@ -43,7 +43,6 @@ The mneme CLI uses **long flags only** (`--lang`, `--code`, `--path`, `--url`). 
 | `Bash` with curl/wget | `mneme fetch --url <url>` then `mneme search -q '...'` |
 | `Read` for analysis (not editing) | `mneme exec-file --path <file> --lang python --code '...'` |
 | `Grep` with many results | `mneme execute --lang shell --code 'grep ...'` |
-| `WebFetch` | `mneme fetch --url <url>` then `mneme search -q '...'` |
 | Multiple commands + analysis | `mneme batch --commands-json '[...]' --queries-json '[...]'` |
 | "What should I do before X?" / recalling preferences | `mneme memory search "query"` |
 
@@ -55,7 +54,8 @@ These are intercepted by the PreToolUse hook and will be rejected:
 
 - `curl` / `wget` in Bash -- Use `mneme fetch --url <url>` instead
 - `fetch('http...` / `requests.get(` / `requests.post(` in Bash -- Use `mneme execute` instead
-- `WebFetch` tool -- Use `mneme fetch --url <url>` instead
+
+**Note:** WebFetch is allowed. Content fetched via WebFetch is automatically indexed by mneme and available for future `mneme search` lookups. You can also use `mneme fetch` for explicit fetching and indexing.
 
 ## Usage Examples
 
