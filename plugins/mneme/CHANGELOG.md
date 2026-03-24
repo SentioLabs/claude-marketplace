@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.7.0...mneme-v0.8.0) (2026-03-24)
+
+
+### Features
+
+* **mneme:** add /remember command for explicit memory storage ([53be1c3](https://github.com/SentioLabs/claude-marketplace/commit/53be1c31eb278c4688e705d47313fba74bc8d092))
+
 ## [0.7.0](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.6.0...mneme-v0.7.0) (2026-03-23)
 
 
