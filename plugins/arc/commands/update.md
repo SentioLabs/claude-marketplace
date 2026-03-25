@@ -15,7 +15,7 @@ Available updates:
 
 Examples:
 ```bash
-arc update <id> --status in_progress   # Start working
+arc update <id> --take                 # Claim work (sets session ID + in_progress)
 arc update <id> --priority 1           # Raise priority
 arc update <id> --assignee alice       # Assign to alice
 ```

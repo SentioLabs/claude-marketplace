@@ -185,7 +185,7 @@ EOF
 arc onboard                         # Get context (recovers project if needed)
 arc ready                           # Find available work
 arc show <id>                       # View details
-arc update <id> --status in_progress  # Claim work
+arc update <id> --take                  # Claim work (sets session ID + in_progress)
 ```
 
 ### Creating Issues

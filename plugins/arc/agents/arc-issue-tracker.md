@@ -44,7 +44,7 @@ Types: task, bug, feature, epic, chore
 
 ### Updating Issues
 ```bash
-arc update <id> --status=in_progress    # Claim work
+arc update <id> --take                     # Claim work (sets session ID + in_progress)
 arc update <id> --status=blocked        # Mark as blocked
 arc update <id> --assignee=<name>       # Assign to someone
 arc update <id> --priority=1            # Change priority

@@ -57,7 +57,7 @@ arc list --parent=<epic-id> --status=open
 ### 2. Claim Task
 
 ```bash
-arc update <task-id> --status in_progress
+arc update <task-id> --take
 ```
 
 ### 3. Dispatch Agent
@@ -280,7 +280,7 @@ After successful verification, return to the normal orchestration loop (step 1) 
 
 ```bash
 arc ready                           # Find next task
-arc update <id> --status in_progress  # Claim task
+arc update <id> --take                  # Claim task (sets session ID + in_progress)
 arc show <id>                        # Get task description for subagent
 arc close <id> -r "reason"            # Close completed task
 ```
