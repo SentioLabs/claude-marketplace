@@ -91,13 +91,6 @@
     "note": "Priority update"
   },
   {
-    "query": "Assign the database migration task to alice",
-    "should_trigger": true,
-    "target_command": "arc:update",
-    "note": "Assignee update"
-  },
-
-  {
     "_comment": "=== /arc:close ===",
     "_target": "/arc:close"
   },
@@ -153,13 +146,6 @@
     "target_command": "arc:list",
     "note": "Type-filtered list"
   },
-  {
-    "query": "What issues are assigned to me?",
-    "should_trigger": true,
-    "target_command": "arc:list",
-    "note": "Assignee-filtered list"
-  },
-
   {
     "_comment": "=== /arc:dep ===",
     "_target": "/arc:dep"

@@ -42,10 +42,7 @@ The JSON output has this structure:
       { "id": "PROJ-5.2", "title": "Auth API", "status": "open", "priority": 1, "blocked_by": [] },
       { "id": "PROJ-5.3", "title": "Session middleware", "status": "open", "priority": 2, "blocked_by": ["PROJ-5.2"] }
     ]
-  },
-  "unassigned": [
-    { "id": "PROJ-5.4", "title": "Write tests", "status": "open", "priority": 3, "blocked_by": [] }
-  ]
+  }
 }
 ```
 
@@ -66,12 +63,8 @@ Team composition for "<epic-title>":
 
   frontend (2 issues): Login form, Signup page
   backend  (3 issues): Auth API, User model, Session middleware
-  unassigned (1 issue): Write tests
-
 Proceed with team deployment? [Y/n]
 ```
-
-If there are unassigned issues, suggest either assigning them to a role or leaving them for the lead to handle.
 
 ### Step 3: Create Team and Tasks
 
