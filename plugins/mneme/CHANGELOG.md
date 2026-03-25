@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.8.1...mneme-v0.9.0) (2026-03-24)
+
+
+### Features
+
+* **mneme:** allow WebFetch instead of redirecting to mneme fetch ([e7c79f1](https://github.com/SentioLabs/claude-marketplace/commit/e7c79f1e553e74b04148182ae25859c227ff09f5))
+
 ## [0.8.1](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.8.0...mneme-v0.8.1) (2026-03-24)
 
 
