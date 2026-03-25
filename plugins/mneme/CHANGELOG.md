@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.9.0...mneme-v0.9.1) (2026-03-25)
+
+
+### Bug Fixes
+
+* **mneme:** update plugin for hierarchical path scoping ([ef4e911](https://github.com/SentioLabs/claude-marketplace/commit/ef4e9119cb7375b903a0048815d9cc7808d9f46d))
+
 ## [0.9.0](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.8.1...mneme-v0.9.0) (2026-03-24)
 
 
