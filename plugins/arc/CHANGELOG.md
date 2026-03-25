@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/SentioLabs/claude-marketplace/compare/arc-v0.4.1...arc-v0.5.0) (2026-03-25)
+
+
+### Features
+
+* **arc:** add SessionStart hook to register AI sessions ([3a41d3c](https://github.com/SentioLabs/claude-marketplace/commit/3a41d3c67407bb3fd4536afc934d635bc2293403))
+
 ## [0.4.1](https://github.com/SentioLabs/claude-marketplace/compare/arc-v0.4.0...arc-v0.4.1) (2026-03-24)
 
 
