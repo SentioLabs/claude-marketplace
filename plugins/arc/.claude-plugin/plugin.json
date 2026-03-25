@@ -25,6 +25,15 @@
             "command": "arc prime"
           }
         ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "arc ai session start --stdin"
+          }
+        ]
       }
     ],
     "PreCompact": [
