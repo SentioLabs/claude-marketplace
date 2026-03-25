@@ -55,7 +55,7 @@ These are intercepted by the PreToolUse hook and will be rejected:
 - `curl` / `wget` in Bash -- Use `mneme fetch --url <url>` instead
 - `fetch('http...` / `requests.get(` / `requests.post(` in Bash -- Use `mneme execute` instead
 
-**Note:** WebFetch is allowed. Content fetched via WebFetch is automatically indexed by mneme and available for future `mneme search` lookups. You can also use `mneme fetch` for explicit fetching and indexing.
+**Note:** WebFetch is allowed. Content fetched via WebFetch is automatically indexed by mneme and available for future `mneme search` lookups. If the same URL was fetched before, cached content is injected as context automatically (no re-fetch needed). You can also use `mneme fetch --url <url>` which returns clean markdown content directly and indexes it for search.
 
 ## Usage Examples
 
@@ -83,6 +83,11 @@ mneme exec-file --path src/main.rs --lang python --code 'lines = content.splitli
 
 ```bash
 mneme fetch --url https://docs.example.com/api
+```
+
+Content is returned as clean markdown (HTML converted via readability + html-to-markdown). Use `mneme search` for follow-up queries on the indexed content:
+
+```bash
 mneme search -q "authentication endpoints"
 ```
 
