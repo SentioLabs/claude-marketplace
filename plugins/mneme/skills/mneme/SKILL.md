@@ -131,10 +131,12 @@ mneme memory search "testing strategy" --limit 5
 Use `mneme memory recall` for a context-free top-K recall (no query argument — returns highest-confidence memories):
 
 ```bash
-mneme memory recall --project mneme --top-k 5
+mneme memory recall --top-k 5
 ```
 
-**Important:** `memory search` takes a `<QUERY>` positional argument. `memory recall` takes **no** positional argument — it only accepts options (`--project`, `--top-k`, `--format`). Do not pass a query string to `recall`.
+**Important:** `memory search` takes a `<QUERY>` positional argument. `memory recall` takes **no** positional argument — it only accepts options (`--top-k`, `--format`). Do not pass a query string to `recall`.
+
+Memories are automatically scoped by your working directory — the server resolves CWD against registered paths for hierarchical recall (closest path ancestor scores highest).
 
 ## Output Constraints
 
