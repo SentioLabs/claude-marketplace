@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.9.2](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.9.1...mneme-v0.9.2) (2026-03-25)
+
+
+### Bug Fixes
+
+* **mneme:** move hooks from hooks.json into plugin.json ([d2d96fb](https://github.com/SentioLabs/claude-marketplace/commit/d2d96fbf4a893c1babba4a8ae2aa1126d8503e6c))
+* **mneme:** remove hooks/hooks.json, use only plugin.json inline hooks ([1ffe4d7](https://github.com/SentioLabs/claude-marketplace/commit/1ffe4d7f621560bc3c0ed68277d7cf13f48851af))
+
 ## [0.9.1](https://github.com/SentioLabs/claude-marketplace/compare/mneme-v0.9.0...mneme-v0.9.1) (2026-03-25)
 
 

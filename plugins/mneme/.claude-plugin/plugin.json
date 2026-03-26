@@ -1,6 +1,6 @@
 {
   "name": "mneme",
-  "version": "0.9.3",
+  "version": "0.9.2",
   "description": "Context window protection for Claude Code — sandboxed execution, FTS knowledge base, session continuity. Powered by a single Rust binary.",
   "author": {
     "name": "SentioLabs",
@@ -19,25 +19,97 @@
   ],
   "hooks": {
     "PreToolUse": [
-      { "matcher": "Bash", "hooks": [{ "type": "command", "command": "mneme hook pretooluse" }] },
-      { "matcher": "WebFetch", "hooks": [{ "type": "command", "command": "mneme hook pretooluse" }] },
-      { "matcher": "Read", "hooks": [{ "type": "command", "command": "mneme hook pretooluse" }] },
-      { "matcher": "Grep", "hooks": [{ "type": "command", "command": "mneme hook pretooluse" }] }
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mneme hook pretooluse"
+          }
+        ]
+      },
+      {
+        "matcher": "WebFetch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mneme hook pretooluse"
+          }
+        ]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mneme hook pretooluse"
+          }
+        ]
+      },
+      {
+        "matcher": "Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mneme hook pretooluse"
+          }
+        ]
+      }
     ],
     "PostToolUse": [
-      { "matcher": "", "hooks": [{ "type": "command", "command": "mneme hook posttooluse" }] }
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mneme hook posttooluse"
+          }
+        ]
+      }
     ],
     "SessionStart": [
-      { "matcher": "", "hooks": [{ "type": "command", "command": "mneme hook sessionstart" }] }
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mneme hook sessionstart"
+          }
+        ]
+      }
     ],
     "PreCompact": [
-      { "matcher": "", "hooks": [{ "type": "command", "command": "mneme hook precompact" }] }
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mneme hook precompact"
+          }
+        ]
+      }
     ],
     "SessionEnd": [
-      { "matcher": "", "hooks": [{ "type": "command", "command": "mneme hook sessionend" }] }
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mneme hook sessionend"
+          }
+        ]
+      }
     ],
     "Stop": [
-      { "matcher": "", "hooks": [{ "type": "command", "command": "mneme hook stop" }] }
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mneme hook stop"
+          }
+        ]
+      }
     ]
   }
 }
