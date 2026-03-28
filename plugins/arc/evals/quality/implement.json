@@ -50,7 +50,7 @@
   },
   {
     "eval_id": 3,
-    "eval_name": "Implement verifies result and dispatches mandatory review",
+    "eval_name": "Implement verifies result and dispatches evaluation + review in parallel",
     "prompt": "The arc-implementer just reported back with PASS on all gate checks for ARC-5.1. This task is a child of epic ARC-5.",
     "assertions": [
       {
@@ -60,12 +60,22 @@
       },
       {
         "id": 2,
-        "text": "Output dispatches the review skill after tests pass (review is mandatory, not optional)",
+        "text": "Output dispatches arc-evaluator AND arc-reviewer (via review skill) simultaneously after tests pass",
         "type": "quality"
       },
       {
         "id": 3,
-        "text": "Output closes the task with `arc close` only after both independent test verification AND review pass",
+        "text": "Evaluator dispatch prompt includes the task spec and design spec but NOT the git diff",
+        "type": "quality"
+      },
+      {
+        "id": 4,
+        "text": "Both agent dispatches happen in a single response (parallel, not sequential)",
+        "type": "quality"
+      },
+      {
+        "id": 5,
+        "text": "Output closes the task with `arc close` only after independent test verification, evaluation, AND review all pass",
         "type": "quality"
       }
     ]
@@ -193,6 +203,94 @@
       {
         "id": 3,
         "text": "Output proceeds to close the task (does not re-dispatch for accepted deviations)",
+        "type": "quality"
+      }
+    ]
+  },
+  {
+    "eval_id": 10,
+    "eval_name": "Implement handles evaluator FAIL — spec-intent gap",
+    "prompt": "The arc-evaluator reported FAIL for ARC-5.2. Spec-Intent Gap: spec says 'Return 401 if refresh token is expired' but the evaluator's acceptance test shows the endpoint returns 400 instead of 401 for expired tokens.",
+    "assertions": [
+      {
+        "id": 1,
+        "text": "Output re-dispatches arc-implementer with the evaluator's finding (expected 401, got 400 for expired tokens)",
+        "type": "quality"
+      },
+      {
+        "id": 2,
+        "text": "Output does NOT close the task while the spec-intent gap is unresolved",
+        "type": "constraint"
+      },
+      {
+        "id": 3,
+        "text": "Output re-dispatches evaluator after the fix to verify spec compliance (not just reviewer)",
+        "type": "quality"
+      }
+    ]
+  },
+  {
+    "eval_id": 11,
+    "eval_name": "Implement prioritizes evaluator spec-intent over reviewer code quality",
+    "prompt": "For ARC-5.3, the arc-reviewer says the code is clean with no issues. But the arc-evaluator reports FAIL: spec requires 'idempotent delete — deleting a non-existent resource returns 204' but the acceptance test shows 404 is returned.",
+    "assertions": [
+      {
+        "id": 1,
+        "text": "Output treats the evaluator's spec-intent finding as the priority issue to fix",
+        "type": "quality"
+      },
+      {
+        "id": 2,
+        "text": "Output re-dispatches arc-implementer to fix the idempotent delete behavior (204 not 404)",
+        "type": "quality"
+      },
+      {
+        "id": 3,
+        "text": "Output does NOT close the task because the reviewer said 'no issues' — the evaluator's FAIL takes precedence",
+        "type": "constraint"
+      }
+    ]
+  },
+  {
+    "eval_id": 12,
+    "eval_name": "Implement applies evaluator circuit breaker after 3 cycles",
+    "prompt": "This is the 3rd evaluate/fix cycle for ARC-5.4. The evaluator keeps reporting FAIL on the same finding: spec says 'rate limit per user' but the implementation rate-limits per IP. The implementer keeps re-implementing per-IP rate limiting.",
+    "assertions": [
+      {
+        "id": 1,
+        "text": "Output recognizes the 3-cycle evaluator circuit breaker threshold",
+        "type": "quality"
+      },
+      {
+        "id": 2,
+        "text": "Output STOPS the evaluate/fix loop and escalates to the user",
+        "type": "quality"
+      },
+      {
+        "id": 3,
+        "text": "Output presents both interpretations (evaluator: per-user, implementer: per-IP) for the user to clarify",
+        "type": "quality"
+      },
+      {
+        "id": 4,
+        "text": "Output does NOT dispatch a 4th cycle without user guidance",
+        "type": "constraint"
+      }
+    ]
+  },
+  {
+    "eval_id": 13,
+    "eval_name": "Implement skips evaluator for docs-only tasks",
+    "prompt": "The arc-doc-writer just completed ARC-5.9, a docs-only task for updating API reference docs.",
+    "assertions": [
+      {
+        "id": 1,
+        "text": "Output does NOT dispatch arc-evaluator for docs-only tasks",
+        "type": "constraint"
+      },
+      {
+        "id": 2,
+        "text": "Output proceeds to close the task without adversarial evaluation",
         "type": "quality"
       }
     ]

@@ -105,7 +105,7 @@ When the subagent reports back, check the **Result** and **Gate Results** in its
 
 **If `PASS`** (all gate checks passed):
 - Run the project test command fresh yourself to confirm — do NOT trust the subagent's report alone
-- If tests pass → proceed to step 5 (Dispatch Review)
+- If tests pass → proceed to step 5 (Dispatch Evaluation and Review)
 
 **If `PARTIAL`** (gate identified unresolved issues):
 - Read the `Gate: Unresolved` section carefully
@@ -139,22 +139,50 @@ Continue implementing this task. A previous attempt was made but the gate check 
 Fix the identified issues, re-run all gate checks, and commit when complete.
 ```
 
-### 5. Dispatch Review
+### 5. Dispatch Evaluation and Review (Parallel)
 
-After confirming tests pass, invoke the `review` skill to check both code quality and plan adherence:
+After confirming tests pass, dispatch the evaluator and reviewer **simultaneously** — they examine orthogonal concerns and do not depend on each other:
 
 ```bash
 # Get the design context from the parent epic
 PARENT=$(arc show <task-id> --json | jq -r '.parent_id // empty')
+# Get BASE and HEAD SHAs for the reviewer
+BASE_SHA=$PRE_TASK_SHA
+HEAD_SHA=$(git rev-parse HEAD)
 ```
 
-The review skill handles retrieving the full design excerpt and dispatching the reviewer. Pass the task ID and the PRE_TASK_SHA recorded in step 3.
+**In a single response**, dispatch both agents:
 
-> **Note**: For `docs-only` tasks, review remains optional. Skip this step unless the documentation changes are substantial or affect developer-facing API docs.
+**Agent 1 — `arc-evaluator`** (adversarial spec verification):
 
-### 6. Handle Review Findings
+```
+Evaluate whether this implementation faithfully satisfies the spec. Write your own acceptance tests from the spec alone — do NOT read the implementer's tests or the git diff.
 
-Process the review skill's triage results:
+## Task Spec
+<paste output of: arc show <task-id>>
+
+## Design Spec
+<paste the design excerpt relevant to this task — from the epic's plan>
+If no design spec is available, omit this section entirely.
+
+## Base SHA
+<BASE_SHA> (use for: git diff --name-only <BASE_SHA>..HEAD to find changed files)
+
+## Project Test Command
+<project's test command, e.g., make test, go test ./...>
+```
+
+**Agent 2 — `arc-reviewer`** (code quality and plan adherence):
+
+Invoke the `review` skill as before — it dispatches the `arc-reviewer` with the diff, task spec, and design spec. Pass the task ID and the PRE_TASK_SHA recorded in step 3.
+
+> **Note**: For `docs-only` tasks, skip the evaluator entirely. Review remains optional — use it only for substantial documentation changes that affect developer-facing API docs.
+
+### 6. Triage Findings
+
+Both agents report back. Triage their findings together:
+
+#### Reviewer findings (code quality)
 
 | Finding | Action |
 |---------|--------|
@@ -164,6 +192,24 @@ Process the review skill's triage results:
 | **Deviation (accept)** | Log as arc comment: "Accepted deviation: \<description\>. Rationale: \<why\>." Proceed. |
 
 For accepted deviations, the orchestrator decides — not the reviewer. If unsure whether a deviation is an improvement, default to fixing it to match the plan.
+
+#### Evaluator findings (spec compliance)
+
+| Finding | Action |
+|---------|--------|
+| **PASS** | Evaluator confirms spec compliance independently. Proceed. |
+| **CONCERNS** (edge cases / minor gaps) | Note findings in arc comment. Decide: fix now or defer. |
+| **FAIL — Spec-Intent Gap** | Re-dispatch `arc-implementer` with the evaluator's finding. Include what the spec says, what the evaluator expected, and what actually happened. Re-evaluate after. |
+| **FAIL — Missing Behavior** | Re-dispatch `arc-implementer` with the missing behavior. Re-evaluate after. |
+| **Untestable Requirement** | This may indicate an incomplete public API. Assess whether the interface needs expansion and re-dispatch if so. |
+
+#### Conflict resolution
+
+If the reviewer and evaluator disagree (e.g., the reviewer says the code is clean but the evaluator says it doesn't match the spec), **the evaluator's spec-intent findings take priority** — correct behavior matters more than code style. Fix spec compliance first, then address code quality in the re-review cycle.
+
+#### Circuit breaker
+
+If 3 evaluate/fix cycles on the same finding haven't resolved it, STOP. The evaluator's interpretation of the spec may differ from a valid alternative reading. Escalate to the user with both interpretations — the spec may need clarification.
 
 ### 7. Close Task
 

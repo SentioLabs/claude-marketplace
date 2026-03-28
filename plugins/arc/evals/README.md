@@ -16,6 +16,7 @@ evals/
     implement.json     # Quality evals for implement skill output (9 evals)
     debug.json         # Quality evals for debug skill output (5 evals)
     verify.json        # Quality evals for verify skill output (5 evals)
+    evaluate.json      # Quality evals for arc-evaluator agent output (11 evals)
     review.json        # Quality evals for review skill output (7 evals)
     finish.json        # Quality evals for finish skill output (6 evals)
 ```

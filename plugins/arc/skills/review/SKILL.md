@@ -99,6 +99,18 @@ When receiving review feedback from the `arc-reviewer`:
 - **If it's ambiguous, test it.** Write a test that proves or disproves the concern.
 - **No ego.** The reviewer is checking the subagent's work, not yours personally.
 
+## Relationship to the Evaluator
+
+When dispatched from the `implement` skill, the reviewer runs **in parallel** with the `arc-evaluator`. Their concerns are complementary, not overlapping:
+
+| | Reviewer (you) | Evaluator |
+|---|---|---|
+| **Focus** | Code quality, conventions, plan adherence | Spec-intent compliance via independent testing |
+| **Input** | Git diff + spec | Spec only (no diff) |
+| **Modifies code?** | No | Writes ephemeral acceptance tests, then deletes them |
+
+The reviewer should focus on what it does best — code quality, naming, structure, conventions, and plan adherence. Do not attempt behavioral verification (e.g., "this function probably handles empty input correctly") — the evaluator handles that with actual tests. If you notice a code path that looks like it might not match the spec, flag it as a finding with your reasoning, but defer to the evaluator's test results for behavioral confirmation.
+
 ## Contexts
 
 This skill works in both execution models:
@@ -114,4 +126,5 @@ This skill works in both execution models:
 - Re-review after fixes — don't assume fixes are correct
 - The reviewer reports; you decide what to do with the findings
 - Never make code changes in the review skill — dispatch the implementer for fixes
+- Focus on code quality — leave behavioral verification to the evaluator
 - Format all arc content (descriptions, plans, comments) per `skills/arc/_formatting.md`
