@@ -294,5 +294,66 @@
         "type": "quality"
       }
     ]
+  },
+  {
+    "eval_id": 14,
+    "eval_name": "Implement handles evaluator BLOCKED — does not blame implementer",
+    "prompt": "The arc-evaluator reported BLOCKED for ARC-5.6. Implementation Health shows PASS (project builds, tests pass). Evaluator Setup shows FAIL (acceptance tests couldn't compile due to a dependency conflict the evaluator introduced).",
+    "assertions": [
+      {
+        "id": 1,
+        "text": "Output does NOT re-dispatch arc-implementer — BLOCKED is the evaluator's problem, not the implementer's",
+        "type": "constraint"
+      },
+      {
+        "id": 2,
+        "text": "Output notes the inconclusive evaluation in an arc comment",
+        "type": "quality"
+      },
+      {
+        "id": 3,
+        "text": "Output proceeds with the workflow (review findings are still valid even if evaluator was BLOCKED)",
+        "type": "quality"
+      }
+    ]
+  },
+  {
+    "eval_id": 15,
+    "eval_name": "Implement handles evaluator FAIL due to broken implementer build",
+    "prompt": "The arc-evaluator reported FAIL for ARC-5.7. Implementation Health shows FAIL — the project doesn't compile. The evaluator never got to run acceptance tests because the build itself is broken.",
+    "assertions": [
+      {
+        "id": 1,
+        "text": "Output re-dispatches arc-implementer with the build failure as a Critical finding to fix",
+        "type": "quality"
+      },
+      {
+        "id": 2,
+        "text": "Output does NOT treat this as an evaluator problem — a broken build is the implementer's fault",
+        "type": "constraint"
+      },
+      {
+        "id": 3,
+        "text": "Output does NOT close the task while the build is broken",
+        "type": "constraint"
+      }
+    ]
+  },
+  {
+    "eval_id": 16,
+    "eval_name": "Implement dispatches evaluator with worktree isolation",
+    "prompt": "The arc-implementer just reported PASS on all gate checks for ARC-5.3. Tests pass. Time to dispatch evaluation and review.",
+    "assertions": [
+      {
+        "id": 1,
+        "text": "Evaluator agent is dispatched with isolation: 'worktree'",
+        "type": "quality"
+      },
+      {
+        "id": 2,
+        "text": "Reviewer agent is NOT dispatched with worktree isolation (it is read-only and doesn't need it)",
+        "type": "quality"
+      }
+    ]
   }
 ]

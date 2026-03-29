@@ -153,7 +153,9 @@ HEAD_SHA=$(git rev-parse HEAD)
 
 **In a single response**, dispatch both agents:
 
-**Agent 1 — `arc-evaluator`** (adversarial spec verification):
+**Agent 1 — `arc-evaluator`** (adversarial spec verification, **dispatched with `isolation: "worktree"`**):
+
+The evaluator runs in a worktree so it can freely write acceptance tests and add dependencies without dirtying the main working tree. The worktree is automatically discarded when the agent finishes.
 
 ```
 Evaluate whether this implementation faithfully satisfies the spec. Write your own acceptance tests from the spec alone — do NOT read the implementer's tests or the git diff.
@@ -199,8 +201,10 @@ For accepted deviations, the orchestrator decides — not the reviewer. If unsur
 |---------|--------|
 | **PASS** | Evaluator confirms spec compliance independently. Proceed. |
 | **CONCERNS** (edge cases / minor gaps) | Note findings in arc comment. Decide: fix now or defer. |
+| **FAIL — Implementation Health** | The project doesn't build or existing tests fail. This is a real implementer bug — re-dispatch `arc-implementer` with the build/test failure. |
 | **FAIL — Spec-Intent Gap** | Re-dispatch `arc-implementer` with the evaluator's finding. Include what the spec says, what the evaluator expected, and what actually happened. Re-evaluate after. |
 | **FAIL — Missing Behavior** | Re-dispatch `arc-implementer` with the missing behavior. Re-evaluate after. |
+| **BLOCKED** | The evaluator's own test setup failed (compilation, dependency resolution). This is NOT an implementer problem. Do NOT re-dispatch the implementer. Note in arc comment and proceed — the evaluator's verdict is inconclusive for this task. |
 | **Untestable Requirement** | This may indicate an incomplete public API. Assess whether the interface needs expansion and re-dispatch if so. |
 
 #### Conflict resolution

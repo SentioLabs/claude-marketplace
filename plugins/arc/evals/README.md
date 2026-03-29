@@ -17,10 +17,10 @@ evals/
   quality/                     # Once activated, does it behave correctly?
     brainstorm.json            # Brainstorm skill output (7 evals)
     plan.json                  # Plan skill output (5 evals)
-    implement.json             # Implement skill output (13 evals)
+    implement.json             # Implement skill output (16 evals)
     debug.json                 # Debug skill output (5 evals)
     verify.json                # Verify skill output (5 evals)
-    evaluate.json              # Arc-evaluator agent output (11 evals)
+    evaluate.json              # Arc-evaluator agent output (13 evals)
     review.json                # Review skill output (7 evals)
     finish.json                # Finish skill output (6 evals)
   workspace/                   # Eval run artifacts (gitignored)
@@ -170,22 +170,27 @@ The `evaluate.json` quality evals test the arc-evaluator agent's core properties
 
 | Eval cluster | What it tests | What failure means |
 |---|---|---|
-| Evals 1 | Information asymmetry | Evaluator read the diff or implementer's tests — independence compromised |
+| Eval 1 | Information asymmetry | Evaluator read the diff or implementer's tests — independence compromised |
 | Eval 2 | Independent test writing | Acceptance tests aren't derived from spec alone |
-| Eval 3 | Cleanup discipline | Ephemeral tests left in codebase |
+| Eval 3 | Worktree discipline | Evaluator tried to commit or clean up (worktree handles disposal) |
 | Evals 4, 6 | Concrete findings | Findings are vague instead of actionable |
 | Eval 5 | Ambiguity handling | Evaluator assumed instead of flagging spec ambiguity |
 | Eval 7 | Edge case coverage | Evaluator didn't go beyond explicit spec requirements |
 | Eval 8 | Untestable requirements | Evaluator didn't flag insufficient API surface |
 | Eval 9 | CONCERNS verdict | Wrong severity — core behaviors pass but edge cases failed |
-| Evals 10 | Report structure | Output doesn't follow the structured template |
+| Eval 10 | Report structure | Output doesn't follow the structured template (must include Implementation Health + Evaluator Setup sections) |
 | Eval 11 | Mixed results handling | Complex multi-requirement evaluation with mixed pass/fail |
+| Eval 12 | Broken build → FAIL | Evaluator reported BLOCKED when the implementer's build is broken — should be FAIL |
+| Eval 13 | Evaluator setup failure → BLOCKED | Evaluator reported FAIL when its own tests didn't compile — should be BLOCKED |
 
-The `implement.json` evals 10-13 test the orchestrator's integration with the evaluator:
+The `implement.json` evals 10-16 test the orchestrator's integration with the evaluator:
 - Eval 10: Handles evaluator FAIL by re-dispatching implementer
 - Eval 11: Prioritizes evaluator spec-intent over reviewer code quality
 - Eval 12: Applies circuit breaker after 3 evaluator cycles
 - Eval 13: Skips evaluator for docs-only tasks
+- Eval 14: Handles evaluator BLOCKED — does not blame implementer
+- Eval 15: Handles evaluator FAIL due to broken implementer build
+- Eval 16: Dispatches evaluator with worktree isolation
 
 ## Writing New Evals
 

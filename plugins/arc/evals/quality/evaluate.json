@@ -55,23 +55,23 @@
   },
   {
     "eval_id": 3,
-    "eval_name": "Evaluator cleans up acceptance tests before reporting",
+    "eval_name": "Evaluator does not commit — worktree is ephemeral",
     "prompt": "All acceptance tests pass for ARC-5.3. Report results.",
     "assertions": [
       {
         "id": 1,
-        "text": "Output deletes all acceptance test files it created",
-        "type": "quality"
+        "text": "Output does NOT run git commit or git add",
+        "type": "constraint"
       },
       {
         "id": 2,
-        "text": "Output runs git status to verify no untracked acceptance test files remain",
+        "text": "Output does NOT attempt to clean up or delete test files (worktree handles disposal)",
         "type": "quality"
       },
       {
         "id": 3,
-        "text": "Output does NOT leave acceptance tests in the codebase as part of the deliverable",
-        "type": "constraint"
+        "text": "Output reports findings directly without cleanup steps",
+        "type": "quality"
       }
     ]
   },
@@ -219,31 +219,36 @@
   },
   {
     "eval_id": 10,
-    "eval_name": "Evaluator report follows the structured template format",
+    "eval_name": "Evaluator report follows the structured template format including health checks",
     "prompt": "Evaluate ARC-5.10 (API key generation). Spec says: 'Generate API keys with a configurable prefix. Keys must be 32 characters (excluding prefix). Revoke key by ID. Revoked keys return 403 on use.' Base SHA is def5678.",
     "assertions": [
       {
         "id": 1,
-        "text": "Report starts with '## Evaluation: PASS', '## Evaluation: CONCERNS', or '## Evaluation: FAIL'",
+        "text": "Report starts with '## Evaluation: PASS', '## Evaluation: CONCERNS', '## Evaluation: FAIL', or '## Evaluation: BLOCKED'",
         "type": "quality"
       },
       {
         "id": 2,
-        "text": "Report contains a '### Spec Coverage' section listing each spec requirement with PASS or FAIL",
+        "text": "Report contains an '### Implementation Health' section verifying the project builds and existing tests pass",
         "type": "quality"
       },
       {
         "id": 3,
-        "text": "Report contains a '### Findings' section (even if empty with 'No findings')",
+        "text": "Report contains an '### Evaluator Setup' section tracking the evaluator's own test compilation and dependency resolution",
         "type": "quality"
       },
       {
         "id": 4,
-        "text": "Report contains a '### Summary' section with a 2-3 sentence assessment",
+        "text": "Report contains a '### Spec Coverage' section listing each spec requirement with PASS or FAIL",
         "type": "quality"
       },
       {
         "id": 5,
+        "text": "Report contains a '### Summary' section with a 2-3 sentence assessment",
+        "type": "quality"
+      },
+      {
+        "id": 6,
         "text": "Spec Coverage lists all four requirements: configurable prefix, 32-char length, revoke by ID, revoked key returns 403",
         "type": "quality"
       }
@@ -283,6 +288,60 @@
         "id": 6,
         "text": "Session creation and refresh are marked as PASS in Spec Coverage",
         "type": "quality"
+      }
+    ]
+  },
+  {
+    "eval_id": 12,
+    "eval_name": "Evaluator reports FAIL when the implementer's build is broken",
+    "prompt": "Evaluate ARC-5.12 (webhook delivery). Before writing any acceptance tests, you run the project build and it fails: 'error: cannot find crate for webhook_handler'. The existing test suite also fails with the same compilation error.",
+    "assertions": [
+      {
+        "id": 1,
+        "text": "Implementation Health section shows project build as FAIL",
+        "type": "quality"
+      },
+      {
+        "id": 2,
+        "text": "Overall evaluation result is FAIL (not BLOCKED) — a broken build is the implementer's fault",
+        "type": "quality"
+      },
+      {
+        "id": 3,
+        "text": "The build failure is reported as a Critical finding under Findings, not just noted in the health check",
+        "type": "quality"
+      },
+      {
+        "id": 4,
+        "text": "Output does NOT report BLOCKED — BLOCKED is reserved for the evaluator's own setup failures",
+        "type": "constraint"
+      }
+    ]
+  },
+  {
+    "eval_id": 13,
+    "eval_name": "Evaluator reports BLOCKED when its own test setup fails",
+    "prompt": "Evaluate ARC-5.13 (PDF export). The project builds fine and existing tests pass. You write acceptance tests but they fail to compile because you added a test dependency that conflicts with the project's pinned version: 'error: incompatible version of pdf-writer'.",
+    "assertions": [
+      {
+        "id": 1,
+        "text": "Implementation Health section shows project build as PASS and existing tests as PASS",
+        "type": "quality"
+      },
+      {
+        "id": 2,
+        "text": "Evaluator Setup section shows acceptance test compilation as FAIL",
+        "type": "quality"
+      },
+      {
+        "id": 3,
+        "text": "Overall evaluation result is BLOCKED (not FAIL) — the evaluator's dependency conflict is not the implementer's fault",
+        "type": "quality"
+      },
+      {
+        "id": 4,
+        "text": "Output does NOT report findings against the implementation — spec coverage is inconclusive when BLOCKED",
+        "type": "constraint"
       }
     ]
   }
