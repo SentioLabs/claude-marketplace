@@ -23,6 +23,14 @@
       "author": {
         "name": "Sentio Labs"
       }
+    },
+    {
+      "name": "slop-review",
+      "source": "./plugins/slop-review",
+      "description": "Detect low-quality AI-generated code using a 3-lens parallel review architecture with model-tiered agents. Scans for AI authorship signals, idiom violations, and code quality issues.",
+      "author": {
+        "name": "Sentio Labs"
+      }
     }
   ]
 }
