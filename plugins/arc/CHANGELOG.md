@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0](https://github.com/SentioLabs/claude-marketplace/compare/arc-v0.5.0...arc-v0.6.0) (2026-04-02)
+
+
+### Features
+
+* **arc:** add adversarial evaluator agent for independent spec verification ([1e52a78](https://github.com/SentioLabs/claude-marketplace/commit/1e52a7866a5ada95695c1e139999b9aad889997e))
+
+
+### Bug Fixes
+
+* **arc:** sandbox evaluator in worktree, split health checks from setup failures ([225ee8f](https://github.com/SentioLabs/claude-marketplace/commit/225ee8f7716e13248785467742e887ba86d1f734))
+
 ## [0.5.0](https://github.com/SentioLabs/claude-marketplace/compare/arc-v0.4.1...arc-v0.5.0) (2026-03-25)
 
 
