@@ -12,6 +12,21 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate Shared Layout
+        run: node shared/scripts/validate-shared.mjs
+
+      - name: Validate Claude Marketplace
+        run: node claude-marketplace/scripts/validate-claude-marketplace.mjs
+
+      - name: Validate Codex Marketplace
+        run: node codex-marketplace/scripts/validate-codex-marketplace.mjs
+
       - uses: googleapis/release-please-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
