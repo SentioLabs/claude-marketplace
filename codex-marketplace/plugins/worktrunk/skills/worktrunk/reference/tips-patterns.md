@@ -143,9 +143,9 @@ Custom emoji markers show agent state in `wt list`. This Codex port can set thes
 Set status manually for any workflow:
 
 ```bash
-$ wt config state marker set &quot;🚧&quot;                   # Current branch
-$ wt config state marker set &quot;✅&quot; --branch feature  # Specific branch
-$ git config worktrunk.state.feature.marker '{&quot;marker&quot;:&quot;💬&quot;,&quot;set_at&quot;:0}'  # Direct
+$ wt config state marker set "🚧"                   # Current branch
+$ wt config state marker set "✅" --branch feature  # Specific branch
+$ git config worktrunk.state.feature.marker '{"marker":"💬","set_at":0}'  # Direct
 ```
 
 See `reference/codex.md` for installation notes, hook caveats, and manual marker commands.
@@ -224,18 +224,18 @@ Spawn a worktree and launch Codex in the background:
 
 **tmux** (new detached session):
 ```bash
-$ tmux new-session -d -s fix-auth-bug &quot;cd /path/to/repo &amp;&amp; \
-$   wt switch --create fix-auth-bug &amp;&amp; \
-$   cd ../repo.fix-auth-bug &amp;&amp; \
-$   codex&quot;
+$ tmux new-session -d -s fix-auth-bug "cd /path/to/repo && \
+$   wt switch --create fix-auth-bug && \
+$   cd ../repo.fix-auth-bug && \
+$   codex"
 ```
 
 **Zellij** (new pane in current session):
 ```bash
-$ zellij run -- sh -lc &quot;cd /path/to/repo &amp;&amp; \
-$   wt switch --create fix-auth-bug &amp;&amp; \
-$   cd ../repo.fix-auth-bug &amp;&amp; \
-$   codex&quot;
+$ zellij run -- sh -lc "cd /path/to/repo && \
+$   wt switch --create fix-auth-bug && \
+$   cd ../repo.fix-auth-bug && \
+$   codex"
 ```
 
 This lets one Codex session hand off work to another that runs in the background. Hooks run inside the multiplexer session or pane. If you want to pass a task description automatically, validate that wrapper locally before depending on it.
@@ -338,7 +338,7 @@ url = "http://{{ branch | sanitize }}.{{ repo }}.localhost:8080"
 Follow background hook output in real-time:
 
 ```bash
-$ tail -f &quot;$(wt config state logs get --hook=user:post-start:server)&quot;
+$ tail -f "$(wt config state logs get --hook=user:post-start:server)"
 ```
 
 The `--hook` format is `source:hook-type:name` — e.g., `project:post-start:build` for project-defined hooks. Use `wt config state logs get` to list all available logs.
@@ -346,7 +346,7 @@ The `--hook` format is `source:hook-type:name` — e.g., `project:post-start:bui
 Create an alias for frequent use:
 
 ```bash
-$ alias wtlog='f() { tail -f &quot;$(wt config state logs get --hook=&quot;$1&quot;)&quot;; }; f'
+$ alias wtlog='f() { tail -f "$(wt config state logs get --hook="$1")"; }; f'
 ```
 
 ## Bare repository layout
