@@ -5,8 +5,8 @@ This directory is a Codex-only packaging of Worktrunk's git worktree guidance. I
 ## What is included
 
 - Codex marketplace metadata for the `worktrunk` plugin
-- A Codex-facing hook contract using only documented Codex events
-- A plugin-local entry point for the Worktrunk skill and reference docs that later tasks will fill in
+- A reference hook configuration using only documented Codex events
+- A plugin-local entry point for the Worktrunk skill and reference docs
 - Repo-local release registration so the plugin can be versioned alongside the rest of this marketplace
 
 ## Install in Codex
@@ -21,9 +21,9 @@ Use the Codex marketplace path for installation and configuration here. Do not f
 
 Codex hooks are experimental. This scaffold uses only the documented `SessionStart`, `UserPromptSubmit`, and `Stop` events.
 
-Local validation on April 3, 2026 enabled `codex_hooks`, linked this plugin into a local Codex plugin directory, and ran `codex exec` in this repository. No Worktrunk marker transition was observed during or after the run, so plugin-bundled hook loading is still unconfirmed in this install flow.
+The repository includes a reference `hooks.json` you can adapt manually into `~/.codex/hooks.json` or `<repo>/.codex/hooks.json` if you want to experiment with marker automation. Local validation on April 3, 2026 enabled `codex_hooks`, linked this plugin into a local Codex plugin directory, and ran `codex exec` in this repository, but no Worktrunk marker transition was observed during or after the run.
 
-The bundled `hooks.json` is therefore a candidate/default configuration, not a guarantee that automatic marker tracking works in every Codex environment. Use manual marker commands if you need reliable branch state today.
+That means plugin installation alone does not currently enable marker updates here. Treat the hook JSON as a manual/reference configuration, not a guaranteed installed capability.
 
 ## Attribution
 

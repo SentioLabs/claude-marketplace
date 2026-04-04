@@ -1,9 +1,9 @@
 # Codex Integration
 
-The Worktrunk Codex plugin provides two pieces of functionality:
+The Worktrunk Codex plugin provides one bundled skill package and one reference hook configuration:
 
 1. **Configuration skill** — Worktrunk documentation Codex can use to help set up commit generation, hooks, and troubleshooting
-2. **Candidate marker configuration** — optional marker updates in `wt list` when a real Codex install flow proves that plugin-bundled hook loading works
+2. **Reference marker configuration** — optional marker updates in `wt list` if you copy the hook JSON into a Codex hook location and the runtime loads it
 
 ## Installation
 
@@ -14,6 +14,7 @@ Install or enable the `worktrunk` entry from this repository's Codex marketplace
 - refresh Codex if the skill does not appear immediately after installation
 
 This port intentionally avoids Claude-only install commands, and it does not invent a `codex plugin install ...` CLI flow that has not been validated here.
+The repository also includes a reference `hooks.json` file, but plugin installation alone does not currently enable marker updates here. Copy that file into `~/.codex/hooks.json` or `<repo>/.codex/hooks.json` if you want to experiment manually.
 
 ## Configuration skill
 
@@ -28,7 +29,7 @@ Use the bundled docs the same way you would use any other Codex skill: ask for W
 
 ## Activity tracking
 
-This port bundles a candidate marker configuration that uses the documented Codex event subset only. Treat automatic marker updates as unconfirmed until a real Codex install flow proves plugin-bundled hook loading:
+This port includes a reference marker configuration that uses the documented Codex event subset only. Treat automatic marker updates as unconfirmed until a real Codex hook location loads the copied configuration:
 
 - `SessionStart` with `startup|resume` clears stale marker state
 - `UserPromptSubmit` sets `🤖`
@@ -52,7 +53,7 @@ $ wt list
 
 Because Codex hook support is experimental, treat these markers as helpful defaults rather than guaranteed state transitions.
 
-On April 3, 2026, local validation enabled `codex_hooks`, linked this plugin into a local Codex plugin directory, and ran `codex exec` in this repository. No marker transition was observed, so automatic tracking remains unconfirmed until plugin-bundled hooks are proven to load in a real install flow.
+On April 3, 2026, local validation enabled `codex_hooks`, linked this plugin into a local Codex plugin directory, and ran `codex exec` in this repository. No marker transition was observed, so automatic tracking remains unconfirmed until a Codex hook location loads the copied configuration in a real install flow.
 
 ### Manual status markers
 
