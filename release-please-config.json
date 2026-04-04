@@ -161,6 +161,27 @@
         {"type": "chore", "section": "Miscellaneous", "hidden": true},
         {"type": "test", "section": "Tests", "hidden": true}
       ]
+    },
+    "codex-marketplace/plugins/worktrunk": {
+      "release-type": "simple",
+      "component": "codex-worktrunk",
+      "bump-minor-pre-major": true,
+      "extra-files": [
+        {
+          "type": "json",
+          "path": ".codex-plugin/plugin.json",
+          "jsonpath": "$.version"
+        }
+      ],
+      "changelog-sections": [
+        {"type": "feat", "section": "Features"},
+        {"type": "fix", "section": "Bug Fixes"},
+        {"type": "perf", "section": "Performance"},
+        {"type": "refactor", "section": "Refactoring"},
+        {"type": "docs", "section": "Documentation", "hidden": true},
+        {"type": "chore", "section": "Miscellaneous", "hidden": true},
+        {"type": "test", "section": "Tests", "hidden": true}
+      ]
     }
   }
 }
