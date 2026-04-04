@@ -13,7 +13,7 @@ Install or enable the `worktrunk` entry from this repository's Codex marketplace
 - enable the `worktrunk` plugin from the local marketplace flow for this repo
 - refresh Codex if the skill does not appear immediately after installation
 
-This port intentionally does not use `claude plugin ...` commands, and it does not invent a `codex plugin install ...` CLI flow that has not been validated here.
+This port intentionally avoids Claude-only install commands, and it does not invent a `codex plugin install ...` CLI flow that has not been validated here.
 
 ## Configuration skill
 
@@ -51,6 +51,8 @@ $ wt list
 - `💬` means Codex most recently finished a turn and is waiting for input
 
 Because Codex hook support is experimental, treat these markers as helpful defaults rather than guaranteed state transitions.
+
+On April 3, 2026, local validation enabled `codex_hooks`, linked this plugin into Codex's local plugin directory, and ran `codex exec` in this repository. No marker transition was observed, so automatic tracking remains a candidate configuration pending confirmation in a real install flow that demonstrably loads plugin-bundled hooks.
 
 ### Manual status markers
 

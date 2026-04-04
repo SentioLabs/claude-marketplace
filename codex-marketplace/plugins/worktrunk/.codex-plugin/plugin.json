@@ -21,7 +21,7 @@
   "interface": {
     "displayName": "Worktrunk",
     "shortDescription": "Manage git worktrees for parallel agent workflows",
-    "longDescription": "Codex-native packaging of Worktrunk's setup, hooks, commit generation, and multi-worktree workflow guidance, with best-effort activity tracking when supported by Codex hooks.",
+    "longDescription": "Codex-native packaging of Worktrunk's setup, hooks, commit generation, and multi-worktree workflow guidance, with a candidate activity-tracking hook configuration for environments where experimental Codex hooks are confirmed to load.",
     "developerName": "Max Rozen",
     "category": "Productivity",
     "capabilities": [
