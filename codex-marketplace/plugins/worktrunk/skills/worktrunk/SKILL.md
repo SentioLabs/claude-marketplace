@@ -184,7 +184,7 @@ which npm
 which cargo
 
 # For npm, verify script exists
-npm run lint --dry-run
+npm pkg get scripts.lint
 
 # For shell commands, check syntax
 bash -n -c "if [ true ]; then echo ok; fi"

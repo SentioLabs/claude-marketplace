@@ -50,7 +50,7 @@ If a template file is used, verify it exists at the specified path.
 Check sequence:
 1. Verify `.config/wt.toml` exists: `ls -la .config/wt.toml`
 2. Check TOML syntax (use `wt hook show` to see parsed config)
-3. Verify hook type spelling matches one of the seven types
+3. Verify hook type spelling matches one of the documented lifecycle events with pre/post variants
 4. Test command manually in the worktree
 
 ### Hook failing
