@@ -8,15 +8,15 @@ Mneme supports both Claude Code and Codex through repo-local plugin packaging.
 
 ## Claude Code
 
-- Install the Claude plugin from this repository's `plugins/mneme/.claude-plugin/` manifest.
+- Install the Claude plugin from this repository's `claude-marketplace/plugins/mneme/.claude-plugin/` manifest.
 - Claude packaging uses inline hooks in `plugin.json` for transparent tool interception and session events.
 
 ## Codex
 
 - Install the Codex plugin from this repository's `.agents/plugins/marketplace.json` catalog.
 - Codex packaging uses:
-  - `plugins/mneme/.codex-plugin/plugin.json`
-  - `plugins/mneme/hooks.json`
+  - `codex-marketplace/plugins/mneme/.codex-plugin/plugin.json`
+  - `codex-marketplace/plugins/mneme/hooks.json`
 - For transparent routing to work reliably, Codex should connect to a running mneme daemon.
 
 Recommended explicit hook transport:

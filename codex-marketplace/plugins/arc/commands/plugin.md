@@ -8,13 +8,13 @@ Arc supports both Claude Code and Codex through repo-local plugin packaging.
 
 ## Claude Code
 
-- Install the Claude plugin from this repository's `plugins/arc/.claude-plugin/` manifest.
+- Install the Claude plugin from this repository's `claude-marketplace/plugins/arc/.claude-plugin/` manifest.
 - Claude packaging includes automatic session priming and the agent registration hook used by arc's AI session tracking.
 
 ## Codex
 
 - Install the Codex plugin from this repository's `.agents/plugins/marketplace.json` catalog.
-- Codex packaging uses `plugins/arc/.codex-plugin/plugin.json` and `plugins/arc/hooks.json`.
+- Codex packaging uses `codex-marketplace/plugins/arc/.codex-plugin/plugin.json` and `codex-marketplace/plugins/arc/hooks.json`.
 - Codex support in this repo keeps automatic `SessionStart` and `PreCompact` priming so `arc prime` still runs at the right moments.
 
 ## Compatibility note
