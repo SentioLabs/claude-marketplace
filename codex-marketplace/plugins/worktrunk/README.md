@@ -21,7 +21,7 @@ Use the Codex marketplace path for installation and configuration here. Do not f
 
 Codex hooks are experimental. This scaffold uses only the documented `SessionStart`, `UserPromptSubmit`, and `Stop` events.
 
-Local validation on April 3, 2026 enabled `codex_hooks`, linked this plugin into `/Users/bfirestone/plugins/worktrunk`, and ran `codex exec` in this repository. No Worktrunk marker transition was observed during or after the run, so plugin-bundled hook loading is still unconfirmed in this install flow.
+Local validation on April 3, 2026 enabled `codex_hooks`, linked this plugin into a local Codex plugin directory, and ran `codex exec` in this repository. No Worktrunk marker transition was observed during or after the run, so plugin-bundled hook loading is still unconfirmed in this install flow.
 
 The bundled `hooks.json` is therefore a candidate/default configuration, not a guarantee that automatic marker tracking works in every Codex environment. Use manual marker commands if you need reliable branch state today.
 

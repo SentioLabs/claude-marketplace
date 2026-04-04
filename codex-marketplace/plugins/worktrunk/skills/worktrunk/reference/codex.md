@@ -3,7 +3,7 @@
 The Worktrunk Codex plugin provides two pieces of functionality:
 
 1. **Configuration skill** — Worktrunk documentation Codex can use to help set up commit generation, hooks, and troubleshooting
-2. **Best-effort activity tracking** — optional marker updates in `wt list` when Codex hook support is available in the current environment
+2. **Candidate marker configuration** — optional marker updates in `wt list` when a real Codex install flow proves that plugin-bundled hook loading works
 
 ## Installation
 
@@ -28,7 +28,7 @@ Use the bundled docs the same way you would use any other Codex skill: ask for W
 
 ## Activity tracking
 
-When Codex hook loading is available in the current environment, this port uses the documented Codex event subset only:
+This port bundles a candidate marker configuration that uses the documented Codex event subset only. Treat automatic marker updates as unconfirmed until a real Codex install flow proves plugin-bundled hook loading:
 
 - `SessionStart` with `startup|resume` clears stale marker state
 - `UserPromptSubmit` sets `🤖`
@@ -52,7 +52,7 @@ $ wt list
 
 Because Codex hook support is experimental, treat these markers as helpful defaults rather than guaranteed state transitions.
 
-On April 3, 2026, local validation enabled `codex_hooks`, linked this plugin into Codex's local plugin directory, and ran `codex exec` in this repository. No marker transition was observed, so automatic tracking remains a candidate configuration pending confirmation in a real install flow that demonstrably loads plugin-bundled hooks.
+On April 3, 2026, local validation enabled `codex_hooks`, linked this plugin into a local Codex plugin directory, and ran `codex exec` in this repository. No marker transition was observed, so automatic tracking remains unconfirmed until plugin-bundled hooks are proven to load in a real install flow.
 
 ### Manual status markers
 
