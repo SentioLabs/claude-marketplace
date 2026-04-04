@@ -15,6 +15,7 @@ Install or enable the `worktrunk` entry from this repository's Codex marketplace
 
 This port intentionally avoids Claude-only install commands, and it does not invent a `codex plugin install ...` CLI flow that has not been validated here.
 The repository also includes a reference `hooks.json` file, but plugin installation alone does not currently enable marker updates here. Copy that file into `~/.codex/hooks.json` or `<repo>/.codex/hooks.json` if you want to experiment manually.
+If you already have a hooks file, merge the sample into it rather than replacing unrelated Codex hooks.
 
 ## Configuration skill
 

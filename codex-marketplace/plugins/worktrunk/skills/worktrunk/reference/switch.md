@@ -149,15 +149,16 @@ Options:
           Especially useful with shell aliases or wrappers:
 
             alias wsc='wt switch --create'
-            wsc feature-branch
-            cd ../repo.feature-branch && codex
+            wsc feature-branch --execute 'cd {{ worktree_path }} && codex'
 
           For this Codex port, treat prompt-passthrough patterns such as `-x codex -- '<task>'` as
           optional local conventions that need separate validation. The documented safe default is
           to create the worktree first and launch Codex as a second step.
 
           Template example: -x 'code {{ worktree_path }}' opens VS Code at the worktree, -x 'tmux
-          new -s {{ branch | sanitize }}' starts a tmux session named after the branch.
+          new -s {{ branch | sanitize }}' starts a tmux session named after the branch, and
+          `--execute 'cd {{ worktree_path }} && codex'` launches Codex without assuming any
+          particular worktree-path template.
 
       --clobber
           Remove stale paths at target

@@ -17,8 +17,8 @@ worktree feature give each agent its own working directory, so they don't step
 on each other's changes.
 
 But the git worktree UX is clunky. Even a task as small as starting a new
-worktree requires typing the branch name three times: `git worktree add -b feat
-../repo.feat`, then `cd ../repo.feat`.
+worktree requires typing the branch name and worktree path multiple times: `git
+worktree add -b feat <worktree-path>`, then `cd <worktree-path>`.
 
 ## Worktrunk makes git worktrees as easy as branches
 
@@ -30,9 +30,9 @@ Worktrees are addressed by branch name; paths are computed from a configurable t
 
 | Task | Worktrunk | Plain git |
 | --- | --- | --- |
-| Switch worktrees | `wt switch feat` | `cd ../repo.feat` |
-| Create a worktree | `wt switch -c feat` | `git worktree add -b feat ../repo.feat && cd ../repo.feat` |
-| Clean up | `wt remove` | `cd ../repo && git worktree remove ../repo.feat && git branch -d feat` |
+| Switch worktrees | `wt switch feat` | `cd <worktree-path>` |
+| Create a worktree | `wt switch -c feat` | `git worktree add -b feat <worktree-path> && cd <worktree-path>` |
+| Clean up | `wt remove` | `cd <repo> && git worktree remove <worktree-path> && git branch -d feat` |
 | List with status | `wt list` | `git worktree list (paths only)` |
 
 > Expand into the more advanced commands as needed
@@ -137,13 +137,13 @@ For parallel agents, create multiple worktrees and then launch Codex in each one
 
 ```bash
 $ wt switch --create feature-a
-$ cd ../repo.feature-a && codex
+$ wt switch --create feature-a --execute 'cd {{ worktree_path }} && codex'
 
 $ wt switch --create feature-b
-$ cd ../repo.feature-b && codex
+$ wt switch --create feature-b --execute 'cd {{ worktree_path }} && codex'
 
 $ wt switch --create feature-c
-$ cd ../repo.feature-c && codex
+$ wt switch --create feature-c --execute 'cd {{ worktree_path }} && codex'
 ```
 
 Use [post-start hooks](https://worktrunk.dev/hook/) to automate setup (install deps, start dev servers). If you later validate a local `-x codex` wrapper for your environment, document it in your own shell config before relying on prompt passthrough.

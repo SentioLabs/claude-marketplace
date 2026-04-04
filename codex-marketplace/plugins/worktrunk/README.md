@@ -23,7 +23,7 @@ Codex hooks are experimental. This scaffold uses only the documented `SessionSta
 
 The repository includes a reference `hooks.json` you can adapt manually into `~/.codex/hooks.json` or `<repo>/.codex/hooks.json` if you want to experiment with marker automation. Local validation on April 3, 2026 enabled `codex_hooks`, linked this plugin into a local Codex plugin directory, and ran `codex exec` in this repository, but no Worktrunk marker transition was observed during or after the run.
 
-That means plugin installation alone does not currently enable marker updates here. Treat the hook JSON as a manual/reference configuration, not a guaranteed installed capability.
+If you already have a hooks file, merge the sample into it rather than replacing unrelated Codex hooks. That means plugin installation alone does not currently enable marker updates here. Treat the hook JSON as a manual/reference configuration, not a guaranteed installed capability.
 
 ## Attribution
 

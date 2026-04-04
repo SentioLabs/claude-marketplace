@@ -250,16 +250,16 @@ grep -A 20 "## Warning Messages" reference/shell-integration.md
 
 ## Advanced: Agent Handoffs
 
-When the user requests spawning a worktree for another agent ("spawn a worktree for...", "hand off to another agent"), create or switch to the worktree first and then launch the user's preferred assistant separately. Do not assume `wt switch -x codex -- '<task>'` prompt passthrough is validated in this environment.
+When the user requests spawning a worktree for another agent ("spawn a worktree for...", "hand off to another agent"), create or switch to the worktree first and then launch the user's preferred assistant separately. Do not assume `wt switch -x codex -- '<task>'` prompt passthrough is validated in this environment. Prefer `wt switch --execute` with `{{ worktree_path }}` so the launch command stays template-agnostic.
 
 **tmux** (check `$TMUX` env var):
 ```bash
-tmux new-session -d -s <branch-name> "cd <repo> && wt switch --create <branch-name> && cd ../<repo>.<branch-name> && codex"
+tmux new-session -d -s <branch-name> "cd <repo> && wt switch --create <branch-name> --execute 'cd {{ worktree_path }} && codex'"
 ```
 
 **Zellij** (check `$ZELLIJ` env var):
 ```bash
-zellij run -- sh -lc "cd <repo> && wt switch --create <branch-name> && cd ../<repo>.<branch-name> && codex"
+zellij run -- sh -lc "cd <repo> && wt switch --create <branch-name> --execute 'cd {{ worktree_path }} && codex'"
 ```
 
 **Requirements** (all must be true):
@@ -273,16 +273,12 @@ Example (tmux):
 ```bash
 tmux new-session -d -s fix-auth-bug "\
   cd /path/to/repo && \
-  wt switch --create fix-auth-bug && \
-  cd ../repo.fix-auth-bug && \
-  codex"
+  wt switch --create fix-auth-bug --execute 'cd {{ worktree_path }} && codex'"
 ```
 
 Example (Zellij):
 ```bash
 zellij run -- sh -lc "\
   cd /path/to/repo && \
-  wt switch --create fix-auth-bug && \
-  cd ../repo.fix-auth-bug && \
-  codex"
+  wt switch --create fix-auth-bug --execute 'cd {{ worktree_path }} && codex'"
 ```
