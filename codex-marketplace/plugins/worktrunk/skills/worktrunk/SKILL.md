@@ -90,7 +90,7 @@ Most common request. See `reference/llm-commits.md` for supported tools and exac
 5. **Suggest testing**
    ```bash
    wt step commit --show-prompt | head  # verify prompt builds
-   wt merge  # in a repo with uncommitted changes
+   wt step commit  # safe end-to-end check on a throwaway branch or worktree
    ```
 
 ### Setting Up Project Hooks (Project Config)
@@ -107,7 +107,7 @@ Common request for workflow automation. Follow discovery process:
    - For Rust: Common cargo commands
    - For Python: Check pyproject.toml
 
-3. **Design appropriate hooks** (7 hook types available)
+3. **Design appropriate hooks** (5 lifecycle events with pre/post variants)
    - Dependencies (fast, must complete) → `pre-start`
    - Tests/linting (must pass) → `pre-commit` or `pre-merge`
    - Long builds, dev servers → `post-start`
