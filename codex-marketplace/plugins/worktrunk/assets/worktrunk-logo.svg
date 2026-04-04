@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 96" role="img" aria-labelledby="title">
-  <title>Worktrunk logo</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 96" role="img" aria-labelledby="worktrunk-logo-title">
+  <title id="worktrunk-logo-title">Worktrunk logo</title>
   <rect width="256" height="96" rx="24" fill="#173329"/>
   <rect x="12" y="12" width="72" height="72" rx="18" fill="#4A9B6E"/>
   <path d="M48 66V44M48 44 34 30M48 44 62 30M48 44V24" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
