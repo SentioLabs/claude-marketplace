@@ -45,15 +45,14 @@ server = "lsof -ti :{{ branch | hash_port }} -sTCP:LISTEN | xargs kill 2>/dev/nu
 
 The URL column in `wt list` shows each worktree's dev server:
 
-```bash
-$ wt list
-  <b>Branch</b>       <b>Status</b>        <b>HEAD±</b>    <b>main↕</b>  <b>Remote⇅</b>  <b>URL</b>                     <b>Commit</b>    <b>Age</b>
-@ main           <span class=c>?</span> <span class=d>^</span><span class=d>⇅</span>                         <span class=g>⇡1</span>  <span class=d><span class=r>⇣1</span></span>  <span class=d>http://localhost:12107</span>  <span class=d>41ee0834</span>  <span class=d>4d</span>
-+ feature-api  <span class=c>+</span>   <span class=d>↕</span><span class=d>⇡</span>     <span class=g>+54</span>   <span class=r>-5</span>   <span class=g>↑4</span>  <span class=d><span class=r>↓1</span></span>   <span class=g>⇡3</span>      <span class=d>http://localhost:10703</span>  <span class=d>6814f02a</span>  <span class=d>30m</span>
-+ fix-auth         <span class=d>↕</span><span class=d>|</span>                <span class=g>↑2</span>  <span class=d><span class=r>↓1</span></span>     <span class=d>|</span>     <span class=d>http://localhost:16460</span>  <span class=d>b772e68b</span>  <span class=d>5h</span>
-+ <span class=d>fix-typos</span>        <span class=d>_</span><span class=d>|</span>                           <span class=d>|</span>     <span class=d>http://localhost:14301</span>  <span class=d>41ee0834</span>  <span class=d>4d</span>
+```text
+Branch       Status  HEAD±   main↕  Remote⇅  URL                     Commit    Age
+main         ? ^⇅            ⇡1     ⇣1       http://localhost:12107  41ee0834  4d
+feature-api  + ↕⇡   +54    -5    ↑4    ↓1  ⇡3  http://localhost:10703  6814f02a  30m
+fix-auth     ↕|            ↑2    ↓1    |       http://localhost:16460  b772e68b  5h
+fix-typos    _|                     |      http://localhost:14301  41ee0834  4d
 
-<span class=d>○</span> <span class=d>Showing 4 worktrees, 2 with changes, 2 ahead, 2 columns hidden</span>
+Showing 4 worktrees, 2 with changes, 2 ahead, 2 columns hidden
 ```
 
 Ports are deterministic — `fix-auth` always gets port 16460, regardless of which machine or when. The URL dims if the server isn't running.
@@ -130,9 +129,9 @@ Then `wt step mc` opens an editor for the commit message while plain `wt merge` 
 
 ## Track agent status
 
-Custom emoji markers show agent state in `wt list`. This Codex port can set these automatically when documented hooks are available:
+Custom emoji markers show agent state in `wt list`. This Codex port ships a candidate/default hook configuration, but local validation has not yet confirmed plugin-bundled hook loading in this install flow, so automatic tracking is still unconfirmed:
 
-```
+```text
 + feature-api      ↑  🤖              ↑1      ./repo.feature-api
 + review-ui      ? ↑  💬              ↑1      ./repo.review-ui
 ```
@@ -224,18 +223,18 @@ Spawn a worktree and launch Codex in the background:
 
 **tmux** (new detached session):
 ```bash
-$ tmux new-session -d -s fix-auth-bug "cd /path/to/repo && \
-$   wt switch --create fix-auth-bug && \
-$   cd ../repo.fix-auth-bug && \
-$   codex"
+tmux new-session -d -s fix-auth-bug "cd /path/to/repo && \
+  wt switch --create fix-auth-bug && \
+  cd ../repo.fix-auth-bug && \
+  codex"
 ```
 
 **Zellij** (new pane in current session):
 ```bash
-$ zellij run -- sh -lc "cd /path/to/repo && \
-$   wt switch --create fix-auth-bug && \
-$   cd ../repo.fix-auth-bug && \
-$   codex"
+zellij run -- sh -lc "cd /path/to/repo && \
+  wt switch --create fix-auth-bug && \
+  cd ../repo.fix-auth-bug && \
+  codex"
 ```
 
 This lets one Codex session hand off work to another that runs in the background. Hooks run inside the multiplexer session or pane. If you want to pass a task description automatically, validate that wrapper locally before depending on it.

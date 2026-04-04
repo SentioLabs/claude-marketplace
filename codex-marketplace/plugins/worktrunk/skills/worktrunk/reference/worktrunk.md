@@ -28,40 +28,12 @@ Worktrees are addressed by branch name; paths are computed from a configurable t
 
 **Core commands:**
 
-<table class="cmd-compare">
-  <thead>
-    <tr>
-      <th>Task</th>
-      <th>Worktrunk</th>
-      <th>Plain git</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Switch worktrees</td>
-      <td>wt switch feat</td>
-      <td>cd ../repo.feat</td>
-    </tr>
-    <tr>
-      <td>Create a worktree</td>
-      <td>wt switch -c feat</td>
-      <td>git worktree add -b feat ../repo.feat && \
-cd ../repo.feat</td>
-    </tr>
-    <tr>
-      <td>Clean up</td>
-      <td>wt remove</td>
-      <td>cd ../repo && \
-git worktree remove ../repo.feat && \
-git branch -d feat</td>
-    </tr>
-    <tr>
-      <td>List with status</td>
-      <td>wt list</td>
-      <td>git worktree list (paths only)</td>
-    </tr>
-  </tbody>
-</table>
+| Task | Worktrunk | Plain git |
+| --- | --- | --- |
+| Switch worktrees | `wt switch feat` | `cd ../repo.feat` |
+| Create a worktree | `wt switch -c feat` | `git worktree add -b feat ../repo.feat && cd ../repo.feat` |
+| Clean up | `wt remove` | `cd ../repo && git worktree remove ../repo.feat && git branch -d feat` |
+| List with status | `wt list` | `git worktree list (paths only)` |
 
 > Expand into the more advanced commands as needed
 
@@ -95,8 +67,7 @@ Shell integration allows commands to change directories.
 $ cargo install worktrunk && wt config shell install
 ```
 
-<details>
-<summary><strong>Windows</strong></summary>
+### Windows
 
 On Windows, `wt` defaults to Windows Terminal's command. Winget additionally installs Worktrunk as `git-wt` to avoid the conflict:
 
@@ -106,8 +77,6 @@ $ git-wt config shell install
 ```
 
 Alternatively, disable Windows Terminal's alias (Settings → Privacy & security → For developers → App Execution Aliases → disable "Windows Terminal") to use `wt` directly.
-
-</details>
 
 **Arch Linux:**
 
@@ -121,18 +90,18 @@ Create a worktree for a new feature:
 
 ```bash
 $ wt switch --create feature-auth
-<span class=g>✓</span> <span class=g>Created branch <b>feature-auth</b> from <b>main</b> and worktree @ <b>repo.feature-auth</b></span>
+✓ Created branch feature-auth from main and worktree @ repo.feature-auth
 ```
 
 This creates a new branch and worktree, then switches to it. Do your work, then check all worktrees with [`wt list`](https://worktrunk.dev/list/):
 
 ```bash
 $ wt list
-  <b>Branch</b>        <b>Status</b>        <b>HEAD±</b>    <b>main↕</b>  <b>Remote⇅</b>  <b>Commit</b>    <b>Age</b>   <b>Message</b>
-@ feature-auth  <span class=c>+</span>   <span class=d>↑</span>      <span class=g>+27</span>   <span class=r>-8</span>   <span class=g>↑1</span>               <span class=d>4bc72dc9</span>  <span class=d>2h</span>    <span class=d>Add authentication module</span>
-^ main              <span class=d>^</span><span class=d>⇡</span>                         <span class=g>⇡1</span>      <span class=d>0e631add</span>  <span class=d>1d</span>    <span class=d>Initial commit</span>
+Branch        Status  HEAD±   main↕  Remote⇅  Commit    Age   Message
+feature-auth  + ↑    +27    -8    ↑1             4bc72dc9  2h    Add authentication module
+main          ^⇡            ⇡1      0e631add  1d    Initial commit
 
-<span class=d>○</span> <span class=d>Showing 2 worktrees, 1 with changes, 1 ahead, 1 column hidden</span>
+Showing 2 worktrees, 1 with changes, 1 ahead, 1 column hidden
 ```
 
 The `@` marks the current worktree. `+` means staged changes, `↑1` means 1 commit ahead of main, `⇡` means unpushed commits.
@@ -151,17 +120,17 @@ $ wt remove                         # after PR is merged
 
 ```bash
 $ wt merge main
-<span class=c>◎</span> <span class=c>Generating commit message and committing changes... <span style='color:var(--bright-black,#555)'>(2 files, <span class=g>+53</span></span></span>, no squashing needed<span style='color:var(--bright-black,#555)'>)</span>
-<span style='background:var(--bright-white,#fff)'> </span> <b>Add authentication module</b>
-<span class=g>✓</span> <span class=g>Committed changes @ <span class=d>a1b2c3d</span></span>
-<span class=c>◎</span> <span class=c>Merging 1 commit to <b>main</b> @ <span class=d>a1b2c3d</span> (no rebase needed)</span>
-<span style='background:var(--bright-white,#fff)'> </span> * <span style='color:var(--yellow,#a60)'>a1b2c3d</span> Add authentication module
-<span style='background:var(--bright-white,#fff)'> </span>  auth.rs | 51 <span class=g>+++++++++++++++++++++++++++++++++++++++++++++++++++</span>
-<span style='background:var(--bright-white,#fff)'> </span>  lib.rs  |  2 <span class=g>++</span>
-<span style='background:var(--bright-white,#fff)'> </span>  2 files changed, 53 insertions(+)
-<span class=g>✓</span> <span class=g>Merged to <b>main</b> <span style='color:var(--bright-black,#555)'>(1 commit, 2 files, +53</span></span><span style='color:var(--bright-black,#555)'>)</span>
-<span class=c>◎</span> <span class=c>Removing <b>feature-auth</b> worktree &amp; branch in background (same commit as <b>main</b>,</span> <span class=d>_</span><span class=c>)</span>
-<span class=d>○</span> Switched to worktree for <b>main</b> @ <b>repo</b>
+◎ Generating commit message and committing changes... (2 files, +53), no squashing needed
+Add authentication module
+✓ Committed changes @ a1b2c3d
+◎ Merging 1 commit to main @ a1b2c3d (no rebase needed)
+* a1b2c3d Add authentication module
+  auth.rs | 51 +++++++++++++++++++++++++++++++++++++++++++++++++++
+  lib.rs  |  2 ++
+  2 files changed, 53 insertions(+)
+✓ Merged to main (1 commit, 2 files, +53)
+◎ Removing feature-auth worktree & branch in background (same commit as main, _)
+○ Switched to worktree for main @ repo
 ```
 
 For parallel agents, create multiple worktrees and then launch Codex in each one:
