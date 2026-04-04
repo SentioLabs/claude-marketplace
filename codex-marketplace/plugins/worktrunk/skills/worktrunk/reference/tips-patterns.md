@@ -8,7 +8,8 @@ Create the worktree and launch Codex without assuming any particular worktree-pa
 
 ```bash
 $ alias wsc='wt switch --create'
-$ wsc new-feature --execute 'cd {{ worktree_path }} && codex'
+$ wsc new-feature
+$ codex
 ```
 
 This port does not assume a validated `-x codex -- '<task>'` prompt-passthrough pattern. If you establish one locally, keep it in your own shell config rather than treating it as a documented default here.
@@ -222,14 +223,12 @@ Spawn a worktree and launch Codex in the background:
 
 **tmux** (new detached session):
 ```bash
-tmux new-session -d -s fix-auth-bug "cd /path/to/repo && \
-  wt switch --create fix-auth-bug --execute 'cd {{ worktree_path }} && codex'"
+tmux new-session -d -s fix-auth-bug "wt switch --create fix-auth-bug --execute codex"
 ```
 
 **Zellij** (new pane in current session):
 ```bash
-zellij run -- sh -lc "cd /path/to/repo && \
-  wt switch --create fix-auth-bug --execute 'cd {{ worktree_path }} && codex'"
+zellij run -- sh -lc "wt switch --create fix-auth-bug --execute codex"
 ```
 
 This lets one Codex session hand off work to another that runs in the background. Hooks run inside the multiplexer session or pane. If you want to pass a task description automatically, validate that wrapper locally before depending on it.

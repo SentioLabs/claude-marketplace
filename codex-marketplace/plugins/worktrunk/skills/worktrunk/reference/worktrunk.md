@@ -137,13 +137,13 @@ For parallel agents, create multiple worktrees and then launch Codex in each one
 
 ```bash
 $ wt switch --create feature-a
-$ wt switch --create feature-a --execute 'cd {{ worktree_path }} && codex'
+$ codex
 
 $ wt switch --create feature-b
-$ wt switch --create feature-b --execute 'cd {{ worktree_path }} && codex'
+$ codex
 
 $ wt switch --create feature-c
-$ wt switch --create feature-c --execute 'cd {{ worktree_path }} && codex'
+$ codex
 ```
 
 Use [post-start hooks](https://worktrunk.dev/hook/) to automate setup (install deps, start dev servers). If you later validate a local `-x codex` wrapper for your environment, document it in your own shell config before relying on prompt passthrough.

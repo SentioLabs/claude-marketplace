@@ -254,12 +254,12 @@ When the user requests spawning a worktree for another agent ("spawn a worktree 
 
 **tmux** (check `$TMUX` env var):
 ```bash
-tmux new-session -d -s <branch-name> "cd <repo> && wt switch --create <branch-name> --execute 'cd {{ worktree_path }} && codex'"
+tmux new-session -d -s <branch-name> "wt switch --create <branch-name> --execute codex"
 ```
 
 **Zellij** (check `$ZELLIJ` env var):
 ```bash
-zellij run -- sh -lc "cd <repo> && wt switch --create <branch-name> --execute 'cd {{ worktree_path }} && codex'"
+zellij run -- sh -lc "wt switch --create <branch-name> --execute codex"
 ```
 
 **Requirements** (all must be true):
@@ -272,13 +272,11 @@ zellij run -- sh -lc "cd <repo> && wt switch --create <branch-name> --execute 'c
 Example (tmux):
 ```bash
 tmux new-session -d -s fix-auth-bug "\
-  cd /path/to/repo && \
-  wt switch --create fix-auth-bug --execute 'cd {{ worktree_path }} && codex'"
+  wt switch --create fix-auth-bug --execute codex"
 ```
 
 Example (Zellij):
 ```bash
 zellij run -- sh -lc "\
-  cd /path/to/repo && \
-  wt switch --create fix-auth-bug --execute 'cd {{ worktree_path }} && codex'"
+  wt switch --create fix-auth-bug --execute codex"
 ```
