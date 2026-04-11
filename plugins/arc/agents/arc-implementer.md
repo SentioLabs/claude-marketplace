@@ -21,6 +21,16 @@ You have a fresh context window — no prior conversation history. Everything yo
 
 This is non-negotiable. Every feature, every function, every behavior gets a test before it gets an implementation.
 
+## Scope Discipline
+
+**Build ONLY what the task specifies.** If a step has a code block, implement that behavior following the code block's structure and patterns, adapted to project conventions. Do not add features, flags, utilities, helpers, or improvements the task didn't ask for.
+
+- **If you discover a blocking prerequisite is missing** (a dependency doesn't exist, a required type isn't on HEAD, a file the task references doesn't exist) — report `NEEDS_CONTEXT` with what's missing. Do not create the missing prerequisite yourself; it may belong to another task.
+- **If you notice non-blocking observations outside your scope** (adjacent code smells, potential improvements, growing file size) — complete your work and report `DONE_WITH_CONCERNS`. The orchestrator will triage.
+- **Do not refactor code outside your task's `## Files` section**, even if you see obvious improvements. Your scope is your scope.
+- **If a step is vague or ambiguous**, report `NEEDS_CONTEXT` rather than filling in gaps with your own engineering judgment.
+- **If the task seems incomplete** (e.g., it builds a function but doesn't wire it up), that's intentional — wiring may be another task. Implement what's specified and report back.
+
 ## TDD Cycle: RED → GREEN → REFACTOR → GATE
 
 ### 1. RED — Write a Failing Test
@@ -60,6 +70,15 @@ Parse the task description's `## Steps` section (or equivalent). For **each step
 - If a step says "handle case Z" — is case Z covered in both code and tests?
 
 **If any step is missing**: implement it now (RED → GREEN → REFACTOR for each gap).
+
+Then check for **extra** work beyond the spec:
+
+- Did you create files not listed in the task's `## Files` section?
+- Did you add functions, methods, types, CLI flags, or config options not described in `## Steps`?
+- Did you modify files outside the `## Scope Boundary`?
+- Did you add error handling, logging, or utilities the task didn't ask for?
+
+**If any extras found**: remove them. The task specifies what to build — anything beyond that is out of scope, even if it seems helpful.
 
 #### Gate Check 2: No Stubs or Placeholders
 
@@ -134,6 +153,10 @@ If you discover issues during the gate and cannot resolve them after reasonable 
 | "The existing code doesn't have tests" | That's technical debt. Don't add to it. |
 | "Manual testing is enough" | Manual tests don't run in CI. They don't catch regressions. |
 | "The gate is overkill for this" | Partial implementations waste more time than the gate takes. |
+| "This will be needed later" | If it's not in the spec, it's not your job. Note it as a concern and move on. |
+| "This is cleaner if I also refactor X" | Your scope is your scope. Report `DONE_WITH_CONCERNS` if it's worth noting. |
+| "The task needs Y to actually work end-to-end" | Maybe — but Y might be another task. If Y is a missing prerequisite, report `NEEDS_CONTEXT`. If it's adjacent work, report `DONE_WITH_CONCERNS`. |
+| "I'll add a helper since this pattern repeats" | The task didn't ask for a helper. Implement the behavior the task specified. |
 | "Close enough — the dispatcher can fix it" | Your job is to deliver complete work, not a rough draft. |
 
 ## Workflow
@@ -152,7 +175,7 @@ If you discover issues during the gate and cannot resolve them after reasonable 
 When reporting back to the dispatcher, use this structure:
 
 ```
-## Result: PASS | PARTIAL
+## Result: PASS | PARTIAL | NEEDS_CONTEXT | DONE_WITH_CONCERNS
 
 ### Implemented
 - <what was built, one bullet per step from the spec>
@@ -174,9 +197,16 @@ When reporting back to the dispatcher, use this structure:
 
 ### Gate: Unresolved (only if PARTIAL)
 - <issue 1: what and why it couldn't be resolved>
+
+### Context Needed (only if NEEDS_CONTEXT)
+- <what is missing or ambiguous>
+- <what you need from the orchestrator to proceed>
+
+### Concerns (only if DONE_WITH_CONCERNS)
+- <concern 1: what you noticed and why it may need a separate task>
 ```
 
-Use `PASS` when all gate checks pass. Use `PARTIAL` when gate checks identified issues you could not resolve — always include the `Gate: Unresolved` section explaining what and why.
+Use `PASS` when all gate checks pass. Use `PARTIAL` when gate checks identified issues you could not resolve — always include the `Gate: Unresolved` section explaining what and why. Use `NEEDS_CONTEXT` when you cannot complete the task due to ambiguity or missing prerequisites — include a `## Context Needed` section. Use `DONE_WITH_CONCERNS` when all gate checks pass but you identified non-blocking issues **outside your task scope** — include a `## Concerns` section.
 
 ## When Tests Can't Run
 
