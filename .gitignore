@@ -2,5 +2,7 @@
 *.swp
 *.swo
 *~
+**/evals/
 .claude/
 .serena/
+.ck/
