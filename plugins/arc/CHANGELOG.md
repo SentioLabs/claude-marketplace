@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.7.0](https://github.com/SentioLabs/claude-marketplace/compare/arc-v0.6.0...arc-v0.7.0) (2026-04-11)
+
+
+### Features
+
+* **agents:** add arc-spec-reviewer for lightweight spec compliance verification ([0ab0324](https://github.com/SentioLabs/claude-marketplace/commit/0ab03246e4de1b8897bf4c8f2540b0f096ef676a))
+* **implementer:** add scope discipline, over-building gates, and new statuses ([0d0e0fe](https://github.com/SentioLabs/claude-marketplace/commit/0d0e0fe384a96c20ce1aa6f454286ebcd8ab0a7d))
+* **implement:** replace evaluator-default with spec-compliance-first flow ([cecb2bc](https://github.com/SentioLabs/claude-marketplace/commit/cecb2bc7e9e75e35cb6377f4960301a12315019e))
+* **plan:** add No Placeholders enforcement and self-review checklist ([f5593ab](https://github.com/SentioLabs/claude-marketplace/commit/f5593ab95cda0f51ae38bb7d531ee4765ffa5ce0))
+* **review:** update for conditional evaluator presence ([65decb8](https://github.com/SentioLabs/claude-marketplace/commit/65decb8ade4cceef40afc6c6f02d62010dbae31e))
+
 ## [0.6.0](https://github.com/SentioLabs/claude-marketplace/compare/arc-v0.5.0...arc-v0.6.0) (2026-04-02)
 
 
