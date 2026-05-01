@@ -7,14 +7,16 @@ description: You MUST use this skill to break a design or feature into implement
 
 Break an approved design into bite-sized, self-contained tasks with exact file paths and steps.
 
-## Plan Commands
+## Share Commands
 
-Plans are ephemeral review artifacts backed by filesystem markdown files:
-- `arc plan create <path>` — Register a plan for review, returns plan ID
-- `arc plan show <plan-id>` — Show plan content, status, and comments
-- `arc plan approve <plan-id>` — Approve the plan
-- `arc plan reject <plan-id>` — Reject the plan
-- `arc plan comments <plan-id>` — List review comments
+Plans are reviewed as encrypted **shares** backed by filesystem markdown files in `docs/plans/`. The plan author's edit tokens live in the arc-server's local keyring (a `shares` table in `~/.arc/data.db`) — not in any JSON file:
+
+- `arc share create <path> --local|--share` — Encrypt a plan and create a share, returns share ID
+- `arc share show <share-id>` — Show share content, status, and `file_path`
+- `arc share approve <share-id>` — Approve the share
+- `arc share comments <share-id>` — List all review comments + statuses
+- `arc share pull <share-id>` — Same as `comments` filtered to `status === "accepted"` (the agent-input form)
+- `arc share update <share-id> <plan-file>` — Replace the encrypted plan content
 
 ## Granularity Rule
 
@@ -40,10 +42,10 @@ Add tasks for each step below using `TaskCreate`. If continuing from the brainst
 ### 1. Read the Design
 
 ```bash
-arc plan show <plan-id>
+arc share show <share-id>
 ```
 
-Load the approved design from brainstorm. The plan ID is provided by the brainstorm skill after registration. Understand the full scope before breaking it down.
+Load the approved design from brainstorm. The share ID is provided by the brainstorm skill after registration. Understand the full scope before breaking it down.
 
 ### 2. Identify Shared Contracts (Foundation Task)
 
@@ -140,13 +142,13 @@ When identifying tasks, assign **file ownership** — each file should be owned 
 
 **Never run `arc create` directly** — always delegate to the `arc-issue-tracker` agent. This keeps bulk CLI output in a disposable subagent context.
 
-Read the full plan content first (`arc plan show <plan-id>`), then build a task manifest that includes:
+Read the full plan content first (`arc share show <share-id>`), then build a task manifest that includes:
 1. **The epic** — its description will be populated by the agent from the plan file (see below)
 2. **All child tasks** with self-contained descriptions
 
 **Critical**: Do NOT paste or summarize the plan content into the agent prompt. Instead, pass the plan file path and let the agent read it directly. This prevents content loss from summarization.
 
-Get the plan file path from the `arc plan show` output (the `file_path` field), then dispatch the manifest:
+Get the plan file path from the share keyring — `arc share list --json` returns each share's `plan_file` field. Look up the entry for your `<share-id>` (e.g. `arc share list --json | jq -r '.[] | select(.id=="<share-id>") | .plan_file'`), then dispatch the manifest:
 
 ```
 Use the Agent tool with subagent_type="arc:arc-issue-tracker":
@@ -335,7 +337,7 @@ For `docs-only` tasks, omit `## Test Command` and use `## Verification` instead:
 ## Rules
 
 - Never reference external docs or the full plan in task descriptions — everything needed is in the description
-- Design documents live in `docs/plans/` and are registered via `arc plan create`
+- Design documents live in `docs/plans/` and are registered via `arc share create` (with `--local` or `--share`)
 - Task descriptions must include actual code guidance, not vague instructions
 - Team preparation (teammate labels) is optional — only if user chooses team execution
 - The plan skill creates tasks; it does not implement them
