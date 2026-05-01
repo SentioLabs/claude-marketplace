@@ -148,7 +148,13 @@ Read the full plan content first (`arc share show <share-id>`), then build a tas
 
 **Critical**: Do NOT paste or summarize the plan content into the agent prompt. Instead, pass the plan file path and let the agent read it directly. This prevents content loss from summarization.
 
-Get the plan file path from the share keyring — `arc share list --json` returns each share's `plan_file` field. Look up the entry for your `<share-id>` (e.g. `arc share list --json | jq -r '.[] | select(.id=="<share-id>") | .plan_file'`), then dispatch the manifest:
+Get the plan file path from the share keyring. `arc share list --json` returns an array of entries — look up the one matching your `<share-id>`:
+
+```bash
+arc share list --json | jq -r '.[] | select(.id=="<share-id>") | .plan_file'
+```
+
+Each entry has `{id, kind, url, key_b64url, plan_file, created_at}`. Edit tokens are intentionally redacted from this output. Then dispatch the manifest:
 
 ```
 Use the Agent tool with subagent_type="arc:arc-issue-tracker":

@@ -157,7 +157,7 @@ Plans are reviewed as encrypted **shares** backed by filesystem markdown files i
 | `arc share approve <id>` | Mark the share as approved |
 | `arc share comments <id>` | All review comments + statuses |
 | `arc share pull <id>` | Accepted-only comments (the agent-input form) |
-| `arc share list` | List shares known to this machine (incl. `plan_file` mapping) |
+| `arc share list` | List shares known to this machine (incl. `plan_file` mapping). Add `--json` for `[{id, kind, url, key_b64url, plan_file, created_at}]` — pipe to `jq` to look up a share's local file path |
 | `arc share update <id> <plan-file>` | Replace the encrypted plan content |
 | `arc share delete <id>` | Delete a share (`--force` cleans up local keyring entries when the server is already gone) |
 
