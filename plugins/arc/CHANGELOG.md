@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/SentioLabs/claude-marketplace/compare/arc-v0.7.0...arc-v0.8.0) (2026-05-01)
+
+
+### Features
+
+* **arc:** migrate brainstorm/plan flow from `arc plan` to `arc share` ([e74bb12](https://github.com/SentioLabs/claude-marketplace/commit/e74bb12b3d61c8b1e1f1e3c6498134f5bfd789f6))
+
 ## [0.7.0](https://github.com/SentioLabs/claude-marketplace/compare/arc-v0.6.0...arc-v0.7.0) (2026-04-11)
 
 
